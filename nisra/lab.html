@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<head>
+    <title>docker lab</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <br />
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="jumbotron">
+                    <h1 class="display-4">答案確認器 </h1>
+                    <h2 class="display-4">flag type is: NISRA{XXXXXXX}</h2>
+                </div>
+                <ul class="list-group">
+                        <li class="list-group-item">
+                            <p>
+                            Lab 01(1) <input id="0" type="text"> <button onclick="md5hash(0)">check!</button>
+                            <span id="a0" style="display: none">Correct!</span>
+                            </p>
+                        </li>
+                        <li class="list-group-item">
+                            <p>
+                            Lab 01(2) <input id="1" type="text"> <button onclick="md5hash(1)">check!</button>
+                            <span id="a1" style="display: none">Correct!</span>
+                            </p>
+                        </li>
+                        <li class="list-group-item">
+                            <p>
+                            Lab 01(3) <input id="2" type="text"> <button onclick="md5hash(2)">check!</button>
+                            <span id="a2" style="display: none">Correct!</span>
+                            </p>
+                        </li>
+                        <li class="list-group-item">
+                            <p>
+                            Lab 03 &nbsp;&nbsp;&nbsp;&nbsp;<input id="3" type="text"> <button onclick="md5hash(3)">check!</button>
+                            <span id="a3" style="display: none">Correct!</span>
+                            </p>
+                        </li>
+
+                        <li class="list-group-item">
+                            <p>
+                            Lab 04 - hideflag1 &nbsp;&nbsp;&nbsp;&nbsp;<input id="4" type="text"> <button onclick="md5hash(4)">check!</button>
+                            <span id="a4" style="display: none">Correct!</span>
+                            </p>
+                        </li>
+
+                        <li class="list-group-item">
+                            <p>
+                            Lab 04 - hideflag2 &nbsp;&nbsp;&nbsp;&nbsp;<input id="5" type="text"> <button onclick="md5hash(5)">check!</button>
+                            <span id="a5" style="display: none">Correct!</span>
+                            </p>
+                        </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<script type="text/javascript" src="./md5.min.js"></script>
+<script type="text/javascript">
+    var ans = ['08ea57acd6b08dd94b3e6e5f4177e9fd', 'c2b0d55d66cabf0f7da7352d9b8d7dd5', '316ec7b21d576698d15d78a38d8470c2', '9c668d4185583ba91e3cb76fdec349ea', 'bff12b1b5f06cef05f30df97faf7bbb0' , '6534e0ce53183b440aabd3092a492e98']
+
+    function md5hash(m){
+        var hash = md5(document.getElementById('' + m).value);
+        var x = document.getElementById('a' + m);
+        console.log(m + ', ' + hash);
+
+        if(hash == ans[m]){
+            x.style.display = "inline";
+        }
+        else{
+            x.style.display = "none";
+        }
+    }
+</script>
+</body>
