@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+	$(document).ready(function() {
+    $("button").addClass("animated bounce");
+    $(".text-primary").addClass("animated shake");
+ });
+</script>
+
+</head>
+
+
+
+<style>
+
+	body {
+		/*opacity: 0.5; //透明度設為 0.5*/
+		background-image:url( 'https://i.ytimg.com/vi/mLFJlo4j4Oo/maxresdefault.jpg' );
+　		background-repeat:no-repeat;
+  		background-color: lightblue;
+	}
+	#sidebar1{
+		float : left;
+		width : 22%;
+		text-align: center;
+		color: red;
+		font-family: 'Cabin VF Beta', sans-serif;
+		background-color: lightblue;
+	}
+	#sign{
+		text-align: center;
+	}
+
+	#panel, #flip {
+		float : left;
+		width : 22%;
+		padding: 5px;
+		text-align: center;
+		background-color: #e5eecc;
+		border: solid 1px #c3c3c3;
+	}
+
+	#panel {
+		float : left;
+		width : 22%;
+		padding: 50px;
+		display: none;
+	}
+
+</style>
+
+
+<html>
+	<body>
+		<head>
+			<div id="T1">
+
+				<title>hallo</title>
+				<h1>welcome to my page</h1>
+
+				<h2>How哥宇宙登入系統</h2>
+
+				<div id="sidebar1">
+					<form action="/action_page.php">
+						 <fieldset>
+						    <legend>登入</legend>
+						    達文西帳號:<br>
+						    <input type="text" name="firstname" value="admin">
+						    <br>
+						    達文西密碼:<br>
+						    <input type="text" name="lastname" value="admin">
+						    <br><br>
+						    <input type="submit" value="Submit">
+						  </fieldset>
+						</div>
+					</form>
+				</div>
+
+			</div>
+
+	<!-- 		<div id="flip">Click to slide down panel</div>
+			<div id="panel">Hello world!</div>
+ -->
+		</head>
+	</body>
+</html>
