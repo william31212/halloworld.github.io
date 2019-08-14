@@ -204,6 +204,74 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/post/Uva10625/">
+                            Uva10625 GNU = GNU&#39;sNotUnix
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-08-14T14:52:19+08:00">
+	
+		    8月 14, 2019
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <blockquote>
+<p>寫題解讓自己可以review一次自己寫了甚麼…<br>幾百年沒刷題，程式能力依然爛QQ</p>
+</blockquote>
+<ul>
+<li>題目</li>
+</ul>
+<ol>
+<li>有一段字串需要照他的規定做轉換，例如例題的G就要換成GNU’s</li>
+<li>給了原字串要問經過幾次轉換，他詢問的該個字母有幾個，最多轉換10000次</li>
+<li>每個答案要間隔一個換行</li>
+</ol>
+<ul>
+<li><p>解題思路</p>
+<ul>
+<li>因為題目只是將一個字母轉換成字串，因此我們只需要計算每個字母在每次轉換的總數有幾個，不需照著做轉換。</li>
+<li>而題目有提到會出現的字元Ascii是從33~126之間，因此只要維護一個dp表格(我是直接開200)</li>
+<li>用tmp紀錄字母在轉換時會增加多少個不同的字母數量，接著看上一層狀態該個字母有多少就乘以他的幾倍，紀錄到下一格狀態</li>
+<li>如果紀錄每次狀態，陣列空間會太大，因此每次轉換過後，需要將結果狀態回灌給上一層，這樣只需要兩層的空間。</li>
+</ul>
+</li>
+<li><p>code</p>
+<ul>
+<li><a href="https://github.com/william31212/uva/blob/master/uva10625/uva10625.cpp" target="_blank" rel="noopener">https://github.com/william31212/uva/blob/master/uva10625/uva10625.cpp</a></li>
+</ul>
+</li>
+</ul>
+
+                    
+                        
+
+                    
+                    
+                        <p>
+                            <a href="/post/Uva10625/#post-footer" class="postShorten-excerpt_link link">
+                                留言與分享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/post/Ais3-Day7/">
                             Ais3-Day7
                         </a>
