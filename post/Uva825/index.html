@@ -6,26 +6,26 @@
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Halloworld-website">
-    <title>Uva10625 GNU = GNU&#39;sNotUnix - Halloworld-website</title>
+    <title>Uva825 Walking on the Safe Side - Halloworld-website</title>
     <meta name="author" content="halloworld">
     
     
         <link rel="icon" href="http://halloworld.tw/assets/images/profile.jpg">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"\n寫題解讓自己可以review一次自己寫了甚麼…幾百年沒刷題，程式能力依然爛QQ\n\n\n題目\n\n\n有一段字串需要照他的規定做轉換，例如例題的G就要換成GNU’s\n給了原字串要問經過幾次轉換，他詢問的該個字母有幾個，最多轉換10000次\n每個答案要間隔一個換行\n\n\n解題思路\n\n因為題目只是將一個字母轉換成字串，因此我們只需要計算每個字母在每次轉換的總數有幾個，不需照著做轉換。\n而題目有提到會出現的字元Ascii是從33~126之間，因此只要維護一個dp表格(我是直接開200)\n用tmp紀錄字母在轉換時會增加多少個不同的字母數量，接著看上一層狀態該個字母有多少就乘以他的幾倍，紀錄到下一格狀態\n如果紀錄每次狀態，陣列空間會太大，因此每次轉換過後，需要將結果狀態回灌給上一層，這樣只需要兩層的空間。\n\n\ncode\n\nhttps://github.com/william31212/uva/blob/master/uva10625/uva10625.cpp\n\n\n\n","dateCreated":"2019-08-14T14:52:19+08:00","dateModified":"2019-08-14T15:17:05+08:00","datePublished":"2019-08-14T14:52:19+08:00","description":"","headline":"Uva10625 GNU = GNU'sNotUnix","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://halloworld.tw/post/Uva10625/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://halloworld.tw/post/Uva10625/","keywords":"uva, dp, string"}</script>
-    <meta name="description" content="寫題解讓自己可以review一次自己寫了甚麼…幾百年沒刷題，程式能力依然爛QQ   題目   有一段字串需要照他的規定做轉換，例如例題的G就要換成GNU’s 給了原字串要問經過幾次轉換，他詢問的該個字母有幾個，最多轉換10000次 每個答案要間隔一個換行   解題思路  因為題目只是將一個字母轉換成字串，因此我們只需要計算每個字母在每次轉換的總數有幾個，不需照著做轉換。 而題目有提到會出現的字元">
-<meta name="keywords" content="uva,dp,string">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"\n題目\n\n\n人只能走往左走跟往下走，然後有幾個地方有障礙物，問說從左上走到右下有幾種方法\n\n\n解題思路\n\n想了一下發現是dp，每一格都儲存從上面跟左邊總共有幾種方法，然後初始狀態就一種。\n右下角那格就答案，維護時建議用1-index比較好做\n\n\ncode\n\nhttps://github.com/william31212/uva/blob/master/uva825/uva825.cpp\n\n\n\n","dateCreated":"2019-08-14T15:20:47+08:00","dateModified":"2019-08-14T15:25:24+08:00","datePublished":"2019-08-14T15:20:47+08:00","description":"","headline":"Uva825 Walking on the Safe Side","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://halloworld.tw/post/Uva825/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://halloworld.tw/post/Uva825/","keywords":"uva, dp"}</script>
+    <meta name="description" content="題目   人只能走往左走跟往下走，然後有幾個地方有障礙物，問說從左上走到右下有幾種方法   解題思路  想了一下發現是dp，每一格都儲存從上面跟左邊總共有幾種方法，然後初始狀態就一種。 右下角那格就答案，維護時建議用1-index比較好做   code  https://github.com/william31212/uva/blob/master/uva825/uva825.cpp">
+<meta name="keywords" content="uva,dp">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Uva10625 GNU = GNU&#39;sNotUnix">
-<meta property="og:url" content="http://halloworld.tw/post/Uva10625/index.html">
+<meta property="og:title" content="Uva825 Walking on the Safe Side">
+<meta property="og:url" content="http://halloworld.tw/post/Uva825/index.html">
 <meta property="og:site_name" content="Halloworld-website">
-<meta property="og:description" content="寫題解讓自己可以review一次自己寫了甚麼…幾百年沒刷題，程式能力依然爛QQ   題目   有一段字串需要照他的規定做轉換，例如例題的G就要換成GNU’s 給了原字串要問經過幾次轉換，他詢問的該個字母有幾個，最多轉換10000次 每個答案要間隔一個換行   解題思路  因為題目只是將一個字母轉換成字串，因此我們只需要計算每個字母在每次轉換的總數有幾個，不需照著做轉換。 而題目有提到會出現的字元">
+<meta property="og:description" content="題目   人只能走往左走跟往下走，然後有幾個地方有障礙物，問說從左上走到右下有幾種方法   解題思路  想了一下發現是dp，每一格都儲存從上面跟左邊總共有幾種方法，然後初始狀態就一種。 右下角那格就答案，維護時建議用1-index比較好做   code  https://github.com/william31212/uva/blob/master/uva825/uva825.cpp">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-08-14T07:17:05.277Z">
+<meta property="og:updated_time" content="2019-08-14T07:25:24.069Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Uva10625 GNU = GNU&#39;sNotUnix">
-<meta name="twitter:description" content="寫題解讓自己可以review一次自己寫了甚麼…幾百年沒刷題，程式能力依然爛QQ   題目   有一段字串需要照他的規定做轉換，例如例題的G就要換成GNU’s 給了原字串要問經過幾次轉換，他詢問的該個字母有幾個，最多轉換10000次 每個答案要間隔一個換行   解題思路  因為題目只是將一個字母轉換成字串，因此我們只需要計算每個字母在每次轉換的總數有幾個，不需照著做轉換。 而題目有提到會出現的字元">
+<meta name="twitter:title" content="Uva825 Walking on the Safe Side">
+<meta name="twitter:description" content="題目   人只能走往左走跟往下走，然後有幾個地方有障礙物，問說從左上走到右下有幾種方法   解題思路  想了一下發現是dp，每一格都儲存從上面跟左邊總共有幾種方法，然後初始狀態就一種。 右下角那格就答案，維護時建議用1-index比較好做   code  https://github.com/william31212/uva/blob/master/uva825/uva825.cpp">
     
     
         
@@ -206,12 +206,12 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            Uva10625 GNU = GNU&#39;sNotUnix
+            Uva825 Walking on the Safe Side
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2019-08-14T14:52:19+08:00">
+    <time datetime="2019-08-14T15:20:47+08:00">
 	
 		    8月 14, 2019
     	
@@ -225,29 +225,22 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <blockquote>
-<p>寫題解讓自己可以review一次自己寫了甚麼…<br>幾百年沒刷題，程式能力依然爛QQ</p>
-</blockquote>
-<ul>
+            <ul>
 <li>題目</li>
 </ul>
 <ol>
-<li>有一段字串需要照他的規定做轉換，例如例題的G就要換成GNU’s</li>
-<li>給了原字串要問經過幾次轉換，他詢問的該個字母有幾個，最多轉換10000次</li>
-<li>每個答案要間隔一個換行</li>
+<li>人只能走往左走跟往下走，然後有幾個地方有障礙物，問說從左上走到右下有幾種方法</li>
 </ol>
 <ul>
 <li><p>解題思路</p>
 <ul>
-<li>因為題目只是將一個字母轉換成字串，因此我們只需要計算每個字母在每次轉換的總數有幾個，不需照著做轉換。</li>
-<li>而題目有提到會出現的字元Ascii是從33~126之間，因此只要維護一個dp表格(我是直接開200)</li>
-<li>用tmp紀錄字母在轉換時會增加多少個不同的字母數量，接著看上一層狀態該個字母有多少就乘以他的幾倍，紀錄到下一格狀態</li>
-<li>如果紀錄每次狀態，陣列空間會太大，因此每次轉換過後，需要將結果狀態回灌給上一層，這樣只需要兩層的空間。</li>
+<li>想了一下發現是dp，每一格都儲存從上面跟左邊總共有幾種方法，然後初始狀態就一種。</li>
+<li>右下角那格就答案，維護時建議用1-index比較好做</li>
 </ul>
 </li>
 <li><p>code</p>
 <ul>
-<li><a href="https://github.com/william31212/uva/blob/master/uva10625/uva10625.cpp" target="_blank" rel="noopener">https://github.com/william31212/uva/blob/master/uva10625/uva10625.cpp</a></li>
+<li><a href="https://github.com/william31212/uva/blob/master/uva825/uva825.cpp" target="_blank" rel="noopener">https://github.com/william31212/uva/blob/master/uva825/uva825.cpp</a></li>
 </ul>
 </li>
 </ul>
@@ -261,7 +254,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">標籤</span><br>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/dp/">dp</a> <a class="tag tag--primary tag--small t-link" href="/tags/string/">string</a> <a class="tag tag--primary tag--small t-link" href="/tags/uva/">uva</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/dp/">dp</a> <a class="tag tag--primary tag--small t-link" href="/tags/uva/">uva</a>
 
             </div>
         
@@ -271,8 +264,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Uva825/" data-tooltip="Uva825 Walking on the Safe Side" aria-label="上一篇: Uva825 Walking on the Safe Side">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -281,7 +273,7 @@
             <li class="post-action">
                 
                     
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Ais3-Day7/" data-tooltip="Ais3-Day7" aria-label="下一篇: Ais3-Day7">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Uva10625/" data-tooltip="Uva10625 GNU = GNU&#39;sNotUnix" aria-label="下一篇: Uva10625 GNU = GNU&#39;sNotUnix">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -299,7 +291,7 @@
             
             
             <!-- <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/Uva10625/" title="分享到 Facebook">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/Uva825/" title="分享到 Facebook">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li> -->
@@ -307,7 +299,7 @@
             
             
             <!-- <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/Uva10625/" title="分享到 Google+">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/Uva825/" title="分享到 Google+">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li> -->
@@ -359,8 +351,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Uva825/" data-tooltip="Uva825 Walking on the Safe Side" aria-label="上一篇: Uva825 Walking on the Safe Side">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -369,7 +360,7 @@
             <li class="post-action">
                 
                     
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Ais3-Day7/" data-tooltip="Ais3-Day7" aria-label="下一篇: Ais3-Day7">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Uva10625/" data-tooltip="Uva10625 GNU = GNU&#39;sNotUnix" aria-label="下一篇: Uva10625 GNU = GNU&#39;sNotUnix">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -387,7 +378,7 @@
             
             
             <!-- <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/Uva10625/" title="分享到 Facebook">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/Uva825/" title="分享到 Facebook">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li> -->
@@ -395,7 +386,7 @@
             
             
             <!-- <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/Uva10625/" title="分享到 Google+">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/Uva825/" title="分享到 Google+">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li> -->
@@ -429,7 +420,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/Uva10625/">
+                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/Uva825/">
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>分享到 Facebook</span>
                     </a>
                 </li>
@@ -437,7 +428,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/Uva10625/">
+                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/Uva825/">
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
                     </a>
                 </li>
@@ -496,9 +487,9 @@
     
         <script>
              var disqus_config = function () {
-                 this.page.url = 'http://halloworld.tw/post/Uva10625/';
+                 this.page.url = 'http://halloworld.tw/post/Uva825/';
                  
-                    this.page.identifier = 'post/Uva10625/';
+                    this.page.identifier = 'post/Uva825/';
                  
              };
             (function() {
