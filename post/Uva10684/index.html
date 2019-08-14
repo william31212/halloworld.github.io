@@ -6,26 +6,26 @@
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Halloworld-website">
-    <title>Uva825 Walking on the Safe Side - Halloworld-website</title>
+    <title>Uva10684 The jackpot - Halloworld-website</title>
     <meta name="author" content="halloworld">
     
     
         <link rel="icon" href="http://halloworld.tw/assets/images/profile.jpg">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"\n題目\n\n\n人只能走往左走跟往下走，然後有幾個地方有障礙物，問說從左上走到右下有幾種方法\n\n\n解題思路\n\n想了一下發現是dp，每一格都儲存從上面跟左邊總共有幾種方法，然後初始狀態就一種。\n右下角那格就答案，維護時建議用1-index比較好做\n\n\ncode\n\nhttps://github.com/william31212/uva/blob/master/uva825/uva825.cpp\n\n\n\n","dateCreated":"2019-08-14T15:20:47+08:00","dateModified":"2019-08-14T15:25:24+08:00","datePublished":"2019-08-14T15:20:47+08:00","description":"","headline":"Uva825 Walking on the Safe Side","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://halloworld.tw/post/Uva825/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://halloworld.tw/post/Uva825/","keywords":"uva, dp"}</script>
-    <meta name="description" content="題目   人只能走往左走跟往下走，然後有幾個地方有障礙物，問說從左上走到右下有幾種方法   解題思路  想了一下發現是dp，每一格都儲存從上面跟左邊總共有幾種方法，然後初始狀態就一種。 右下角那格就答案，維護時建議用1-index比較好做   code  https://github.com/william31212/uva/blob/master/uva825/uva825.cpp">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"\n題目\n\n\n要找到連續賭局最大可能贏到的錢，正代表獲勝，負責代表輸錢\n如果都是輸錢就印出Losing streak.\n\n\n題目思路\n\n用dp記錄目前到此局能贏取最多錢的數目，與當格比，如果當格較大就從他開始取\nex: -1,2,3，紀錄到2的時候，如果取-1,2只能贏一塊錢，所以我們選擇只取2，該格的dp就紀錄2\n\n\ncode\n\n\n\n這題自己沒有想出來，我的dp還是有障礙\n\n\nhttps://github.com/william31212/uva/blob/master/uva10684/uva10684.cpp\n\n","dateCreated":"2019-08-14T15:27:53+08:00","dateModified":"2019-08-14T15:39:20+08:00","datePublished":"2019-08-14T15:27:53+08:00","description":"","headline":"Uva10684 The jackpot","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://halloworld.tw/post/Uva10684/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://halloworld.tw/post/Uva10684/","keywords":"uva, dp"}</script>
+    <meta name="description" content="題目   要找到連續賭局最大可能贏到的錢，正代表獲勝，負責代表輸錢 如果都是輸錢就印出Losing streak.   題目思路  用dp記錄目前到此局能贏取最多錢的數目，與當格比，如果當格較大就從他開始取 ex: -1,2,3，紀錄到2的時候，如果取-1,2只能贏一塊錢，所以我們選擇只取2，該格的dp就紀錄2   code    這題自己沒有想出來，我的dp還是有障礙   https://gi">
 <meta name="keywords" content="uva,dp">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Uva825 Walking on the Safe Side">
-<meta property="og:url" content="http://halloworld.tw/post/Uva825/index.html">
+<meta property="og:title" content="Uva10684 The jackpot">
+<meta property="og:url" content="http://halloworld.tw/post/Uva10684/index.html">
 <meta property="og:site_name" content="Halloworld-website">
-<meta property="og:description" content="題目   人只能走往左走跟往下走，然後有幾個地方有障礙物，問說從左上走到右下有幾種方法   解題思路  想了一下發現是dp，每一格都儲存從上面跟左邊總共有幾種方法，然後初始狀態就一種。 右下角那格就答案，維護時建議用1-index比較好做   code  https://github.com/william31212/uva/blob/master/uva825/uva825.cpp">
+<meta property="og:description" content="題目   要找到連續賭局最大可能贏到的錢，正代表獲勝，負責代表輸錢 如果都是輸錢就印出Losing streak.   題目思路  用dp記錄目前到此局能贏取最多錢的數目，與當格比，如果當格較大就從他開始取 ex: -1,2,3，紀錄到2的時候，如果取-1,2只能贏一塊錢，所以我們選擇只取2，該格的dp就紀錄2   code    這題自己沒有想出來，我的dp還是有障礙   https://gi">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-08-14T07:25:24.069Z">
+<meta property="og:updated_time" content="2019-08-14T07:39:20.744Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Uva825 Walking on the Safe Side">
-<meta name="twitter:description" content="題目   人只能走往左走跟往下走，然後有幾個地方有障礙物，問說從左上走到右下有幾種方法   解題思路  想了一下發現是dp，每一格都儲存從上面跟左邊總共有幾種方法，然後初始狀態就一種。 右下角那格就答案，維護時建議用1-index比較好做   code  https://github.com/william31212/uva/blob/master/uva825/uva825.cpp">
+<meta name="twitter:title" content="Uva10684 The jackpot">
+<meta name="twitter:description" content="題目   要找到連續賭局最大可能贏到的錢，正代表獲勝，負責代表輸錢 如果都是輸錢就印出Losing streak.   題目思路  用dp記錄目前到此局能贏取最多錢的數目，與當格比，如果當格較大就從他開始取 ex: -1,2,3，紀錄到2的時候，如果取-1,2只能贏一塊錢，所以我們選擇只取2，該格的dp就紀錄2   code    這題自己沒有想出來，我的dp還是有障礙   https://gi">
     
     
         
@@ -206,12 +206,12 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            Uva825 Walking on the Safe Side
+            Uva10684 The jackpot
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2019-08-14T15:20:47+08:00">
+    <time datetime="2019-08-14T15:27:53+08:00">
 	
 		    8月 14, 2019
     	
@@ -229,20 +229,24 @@
 <li>題目</li>
 </ul>
 <ol>
-<li>人只能走往左走跟往下走，然後有幾個地方有障礙物，問說從左上走到右下有幾種方法</li>
+<li>要找到連續賭局最大可能贏到的錢，正代表獲勝，負責代表輸錢</li>
+<li>如果都是輸錢就印出Losing streak.</li>
 </ol>
 <ul>
-<li><p>解題思路</p>
+<li><p>題目思路</p>
 <ul>
-<li>想了一下發現是dp，每一格都儲存從上面跟左邊總共有幾種方法，然後初始狀態就一種。</li>
-<li>右下角那格就答案，維護時建議用1-index比較好做</li>
+<li>用dp記錄目前到此局能贏取最多錢的數目，與當格比，如果當格較大就從他開始取</li>
+<li>ex: -1,2,3，紀錄到2的時候，如果取-1,2只能贏一塊錢，所以我們選擇只取2，該格的dp就紀錄2</li>
 </ul>
 </li>
 <li><p>code</p>
-<ul>
-<li><a href="https://github.com/william31212/uva/blob/master/uva825/uva825.cpp" target="_blank" rel="noopener">https://github.com/william31212/uva/blob/master/uva825/uva825.cpp</a></li>
-</ul>
 </li>
+</ul>
+<blockquote>
+<p>這題自己沒有想出來，我的dp還是有障礙</p>
+</blockquote>
+<ul>
+<li><a href="https://github.com/william31212/uva/blob/master/uva10684/uva10684.cpp" target="_blank" rel="noopener">https://github.com/william31212/uva/blob/master/uva10684/uva10684.cpp</a></li>
 </ul>
 
             
@@ -264,8 +268,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Uva10684/" data-tooltip="Uva10684 The jackpot" aria-label="上一篇: Uva10684 The jackpot">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -274,7 +277,7 @@
             <li class="post-action">
                 
                     
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Uva10625/" data-tooltip="Uva10625 GNU = GNU&#39;sNotUnix" aria-label="下一篇: Uva10625 GNU = GNU&#39;sNotUnix">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Uva825/" data-tooltip="Uva825 Walking on the Safe Side" aria-label="下一篇: Uva825 Walking on the Safe Side">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -292,7 +295,7 @@
             
             
             <!-- <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/Uva825/" title="分享到 Facebook">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/Uva10684/" title="分享到 Facebook">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li> -->
@@ -300,7 +303,7 @@
             
             
             <!-- <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/Uva825/" title="分享到 Google+">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/Uva10684/" title="分享到 Google+">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li> -->
@@ -352,8 +355,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Uva10684/" data-tooltip="Uva10684 The jackpot" aria-label="上一篇: Uva10684 The jackpot">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -362,7 +364,7 @@
             <li class="post-action">
                 
                     
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Uva10625/" data-tooltip="Uva10625 GNU = GNU&#39;sNotUnix" aria-label="下一篇: Uva10625 GNU = GNU&#39;sNotUnix">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/Uva825/" data-tooltip="Uva825 Walking on the Safe Side" aria-label="下一篇: Uva825 Walking on the Safe Side">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -380,7 +382,7 @@
             
             
             <!-- <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/Uva825/" title="分享到 Facebook">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/Uva10684/" title="分享到 Facebook">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li> -->
@@ -388,7 +390,7 @@
             
             
             <!-- <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/Uva825/" title="分享到 Google+">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/Uva10684/" title="分享到 Google+">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li> -->
@@ -422,7 +424,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/Uva825/">
+                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/Uva10684/">
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>分享到 Facebook</span>
                     </a>
                 </li>
@@ -430,7 +432,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/Uva825/">
+                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/Uva10684/">
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
                     </a>
                 </li>
@@ -489,9 +491,9 @@
     
         <script>
              var disqus_config = function () {
-                 this.page.url = 'http://halloworld.tw/post/Uva825/';
+                 this.page.url = 'http://halloworld.tw/post/Uva10684/';
                  
-                    this.page.identifier = 'post/Uva825/';
+                    this.page.identifier = 'post/Uva10684/';
                  
              };
             (function() {
