@@ -204,6 +204,93 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/post/GSS-03/">
+                            GSS-03
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2020-04-21T21:34:32+08:00">
+	
+		    4月 21, 2020
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><ul>
+<li>沒想到更新已經是兩個月後的事了，結果因為專題關係，我離開GSS了</li>
+<li>不過多了許多時間弄專題跟資訊安全研究，還有看棒球</li>
+</ul>
+<h2 id="Course4-MVC"><a href="#Course4-MVC" class="headerlink" title="Course4 MVC"></a>Course4 MVC</h2><ul>
+<li>使用<code>C#</code>來寫MVC架構，用原生MVC中的Html Helper Function</li>
+<li>Model(資料模型)、View(秀出頁面)、Controller(資料邏輯判斷)</li>
+</ul>
+<h2 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h2><h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><ul>
+<li>字串串接SQL語句，SQL-injeciton風險</li>
+<li>T-SQL(拿系統時間function，新舊版的不同)<ul>
+<li>可能遇到的風險<ul>
+<li>當用戶使用舊版的MSSQL，遇到新語句會發生bug</li>
+</ul>
+</li>
+<li><code>SYSDATETIME()</code></li>
+<li><code>GETDATE()</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="View"><a href="#View" class="headerlink" title="View"></a>View</h3><ul>
+<li><code>Html.HiddenFor()</code>可以藏值，可以使用<code>model_binding</code>拿<code>BOOK_ID</code>不用querystring</li>
+</ul>
+<h3 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h3><ul>
+<li><code>SELECT SCOPE_IDENTITY()</code> 可拿編號</li>
+<li>HTMLencode prevent <code>&lt;BR&gt;</code></li>
+<li>html attr =&gt; MVC method (e.g. Querystring)</li>
+</ul>
+<h3 id="Coding-Style"><a href="#Coding-Style" class="headerlink" title="Coding Style"></a>Coding Style</h3><ul>
+<li>專案名稱前面大寫，取名漂亮一些</li>
+<li>區域變數要用小寫</li>
+<li>Vscode plugin參與團隊專案會有狀況出現</li>
+<li>命名命的長然後清楚為原則，if一行還是要大括號</li>
+<li>sql更改欄位名稱不要有符號</li>
+<li>enum 定義變數較彈性<ul>
+<li><a href="https://docs.microsoft.com/zh-tw/dotnet/api/system.enum?view=netframework-4.8" target="_blank" rel="noopener">https://docs.microsoft.com/zh-tw/dotnet/api/system.enum?view=netframework-4.8</a></li>
+</ul>
+</li>
+<li>駝峰式命名<ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E9%A7%9D%E5%B3%B0%E5%BC%8F%E5%A4%A7%E5%B0%8F%E5%AF%AB" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/%E9%A7%9D%E5%B3%B0%E5%BC%8F%E5%A4%A7%E5%B0%8F%E5%AF%AB</a></li>
+</ul>
+</li>
+<li>變數名稱<del>bi</del> XD</li>
+<li><del>讓自己的變數命名死去</del> KEEP GOING!</li>
+</ul>
+
+                    
+                        
+
+                    
+                    
+                        <p>
+                            <a href="/post/GSS-03/#post-footer" class="postShorten-excerpt_link link">
+                                留言與分享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/post/GSS-02/">
                             GSS-02
                         </a>
@@ -222,7 +309,7 @@
             
                 <div class="postShorten-content">
                     <h2 id="Course3-前端的基礎訓練"><a href="#Course3-前端的基礎訓練" class="headerlink" title="Course3 前端的基礎訓練"></a>Course3 前端的基礎訓練</h2><ul>
-<li>這是使用kenod-ui做的一個圖書管理系統，主要是熟習整個lib的操作</li>
+<li>這是使用kendo-ui做的一個圖書管理系統，主要是熟習整個lib的操作</li>
 </ul>
 <h3 id="以下分享各種坑"><a href="#以下分享各種坑" class="headerlink" title="以下分享各種坑"></a>以下分享各種坑</h3><ul>
 <li>新增<ul>
@@ -1023,82 +1110,6 @@
                     
                         <p>
                             <a href="/post/Ais3-Day6/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/Ais3-Day5/">
-                            Ais3-Day5
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-08-09T20:13:35+08:00">
-	
-		    8月 09, 2019
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h1 id="AIS3系列文"><a href="#AIS3系列文" class="headerlink" title="AIS3系列文"></a>AIS3系列文</h1><h2 id="課程"><a href="#課程" class="headerlink" title="課程"></a>課程</h2><ul>
-<li><p>算是整個課程的最後一天了，剩兩天都是報告。早上是一位大大的經驗分享，不過為了兩天後的報告，我大部分都是邊做投影片邊聽他的分享，畢竟技術上面的部分沒有題太多，但後來因為精神不濟，我又睡著了，我的同學還拍到我打呼QQ，但其實我很像只睡了十幾分鐘吧。基本上課程面相比較是實務上的經驗，不過我實在沒有任何部屬或是大專案的經驗，我是認為這堂課可能對要進業界的人比較有用。</p>
-</li>
-<li><p>下午是日本籍大大來上課，主題基本上就是web，但我的英文實在沒有很好，沒有很懂他想要表達的意思，有點鴨子聽雷的感覺，不過他的Lab感覺蠻值得打的，但我很像打了一兩題我就沒有跟上他的進度了。因此我又在趕工投影片，繼續研究meltdown根specture。這次因為灌了綠茶，所以比較沒那麼想睡覺。</p>
-</li>
-<li><p>晚上就不斷地Re我的報告，大致上整個報告模型已經做到6~7成左右。</p>
-</li>
-</ul>
-<h2 id="住宿"><a href="#住宿" class="headerlink" title="住宿"></a>住宿</h2><ul>
-<li>硬</li>
-<li>這天好累，直接睡一波</li>
-<li>跟輔大同學一起團購uber-eat，雞排直接給他買下去，甘願呷後系，馬賣死謀呷</li>
-<li>感謝我的室友幫我解了很多惑≦(._.)≧</li>
-</ul>
-<h2 id="食物"><a href="#食物" class="headerlink" title="食物"></a>食物</h2><ul>
-<li>午餐75+25<ul>
-<li>這天很像又吃滷味，配豆漿</li>
-</ul>
-</li>
-<li>晚餐70+20<ul>
-<li>忘記吃甚麼，只記得錢</li>
-</ul>
-</li>
-<li>宵夜雞排場75<ul>
-<li>好久沒吃一整塊大雞排，覺得人生突然變的美好</li>
-</ul>
-</li>
-</ul>
-<h2 id="圖片"><a href="#圖片" class="headerlink" title="圖片"></a>圖片</h2><ul>
-<li>最後一天的課，我的狀態就如同這張圖<br><img src="https://i.imgur.com/mad2zWs.jpg" width="500px"></li>
-</ul>
-<blockquote>
-<p>詳情可以看我IG精選動態<br>很堅持的每天po，颱風漂過(－_－). z Z</p>
-</blockquote>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/Ais3-Day5/#post-footer" class="postShorten-excerpt_link link">
                                 留言與分享
                             </a>
                         </p>
