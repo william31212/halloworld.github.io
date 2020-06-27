@@ -10,15 +10,15 @@
     <meta name="author" content="halloworld">
     
     
-        <link rel="icon" href="http://halloworld.tw/assets/images/profile.jpg">
+        <link rel="icon" href="http://blog.halloworld.ga/assets/images/profile.jpg">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"\n寫題解讓自己可以review一次自己寫了甚麼…幾百年沒刷題，程式能力依然爛QQ\n\n\n題目\n\n\n有一段字串需要照他的規定做轉換，例如例題的G就要換成GNU’s\n給了原字串要問經過幾次轉換，他詢問的該個字母有幾個，最多轉換10000次\n每個答案要間隔一個換行\n\n\n解題思路\n\n因為題目只是將一個字母轉換成字串，因此我們只需要計算每個字母在每次轉換的總數有幾個，不需照著做轉換。\n而題目有提到會出現的字元Ascii是從33~126之間，因此只要維護一個dp表格(我是直接開200)\n用tmp紀錄字母在轉換時會增加多少個不同的字母數量，接著看上一層狀態該個字母有多少就乘以他的幾倍，紀錄到下一格狀態\n如果紀錄每次狀態，陣列空間會太大，因此每次轉換過後，需要將結果狀態回灌給上一層，這樣只需要兩層的空間。\n\n\ncode\n\nhttps://github.com/william31212/uva/blob/master/uva10625/uva10625.cpp\n\n\n\n","dateCreated":"2019-08-14T14:52:19+08:00","dateModified":"2019-08-14T15:17:05+08:00","datePublished":"2019-08-14T14:52:19+08:00","description":"","headline":"Uva10625 GNU = GNU'sNotUnix","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://halloworld.tw/post/Uva10625/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://halloworld.tw/post/Uva10625/","keywords":"uva, dp, string"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"\n寫題解讓自己可以review一次自己寫了甚麼…幾百年沒刷題，程式能力依然爛QQ\n\n\n題目\n\n\n有一段字串需要照他的規定做轉換，例如例題的G就要換成GNU’s\n給了原字串要問經過幾次轉換，他詢問的該個字母有幾個，最多轉換10000次\n每個答案要間隔一個換行\n\n\n解題思路\n\n因為題目只是將一個字母轉換成字串，因此我們只需要計算每個字母在每次轉換的總數有幾個，不需照著做轉換。\n而題目有提到會出現的字元Ascii是從33~126之間，因此只要維護一個dp表格(我是直接開200)\n用tmp紀錄字母在轉換時會增加多少個不同的字母數量，接著看上一層狀態該個字母有多少就乘以他的幾倍，紀錄到下一格狀態\n如果紀錄每次狀態，陣列空間會太大，因此每次轉換過後，需要將結果狀態回灌給上一層，這樣只需要兩層的空間。\n\n\ncode\n\nhttps://github.com/william31212/uva/blob/master/uva10625/uva10625.cpp\n\n\n\n","dateCreated":"2019-08-14T14:52:19+08:00","dateModified":"2019-08-14T15:17:05+08:00","datePublished":"2019-08-14T14:52:19+08:00","description":"","headline":"Uva10625 GNU = GNU'sNotUnix","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.halloworld.ga/post/Uva10625/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://blog.halloworld.ga/post/Uva10625/","keywords":"uva, dp, string"}</script>
     <meta name="description" content="寫題解讓自己可以review一次自己寫了甚麼…幾百年沒刷題，程式能力依然爛QQ   題目   有一段字串需要照他的規定做轉換，例如例題的G就要換成GNU’s 給了原字串要問經過幾次轉換，他詢問的該個字母有幾個，最多轉換10000次 每個答案要間隔一個換行   解題思路  因為題目只是將一個字母轉換成字串，因此我們只需要計算每個字母在每次轉換的總數有幾個，不需照著做轉換。 而題目有提到會出現的字元">
 <meta name="keywords" content="uva,dp,string">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Uva10625 GNU = GNU&#39;sNotUnix">
-<meta property="og:url" content="http://halloworld.tw/post/Uva10625/index.html">
+<meta property="og:url" content="http://blog.halloworld.ga/post/Uva10625/index.html">
 <meta property="og:site_name" content="Halloworld-website">
 <meta property="og:description" content="寫題解讓自己可以review一次自己寫了甚麼…幾百年沒刷題，程式能力依然爛QQ   題目   有一段字串需要照他的規定做轉換，例如例題的G就要換成GNU’s 給了原字串要問經過幾次轉換，他詢問的該個字母有幾個，最多轉換10000次 每個答案要間隔一個換行   解題思路  因為題目只是將一個字母轉換成字串，因此我們只需要計算每個字母在每次轉換的總數有幾個，不需照著做轉換。 而題目有提到會出現的字元">
 <meta property="og:locale" content="zh-tw">
@@ -31,7 +31,7 @@
         
     
     
-        <meta property="og:image" content="http://halloworld.tw/assets/images/profile.jpg"/>
+        <meta property="og:image" content="http://blog.halloworld.ga/assets/images/profile.jpg"/>
     
     
     
@@ -299,7 +299,7 @@
             
             
             <!-- <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/Uva10625/" title="分享到 Facebook">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.halloworld.ga/post/Uva10625/" title="分享到 Facebook">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li> -->
@@ -307,7 +307,7 @@
             
             
             <!-- <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/Uva10625/" title="分享到 Google+">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.halloworld.ga/post/Uva10625/" title="分享到 Google+">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li> -->
@@ -387,7 +387,7 @@
             
             
             <!-- <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/Uva10625/" title="分享到 Facebook">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.halloworld.ga/post/Uva10625/" title="分享到 Facebook">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li> -->
@@ -395,7 +395,7 @@
             
             
             <!-- <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/Uva10625/" title="分享到 Google+">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.halloworld.ga/post/Uva10625/" title="分享到 Google+">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li> -->
@@ -429,7 +429,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://halloworld.tw/post/Uva10625/">
+                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.halloworld.ga/post/Uva10625/">
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>分享到 Facebook</span>
                     </a>
                 </li>
@@ -437,7 +437,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://halloworld.tw/post/Uva10625/">
+                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://blog.halloworld.ga/post/Uva10625/">
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
                     </a>
                 </li>
@@ -496,7 +496,7 @@
     
         <script>
              var disqus_config = function () {
-                 this.page.url = 'http://halloworld.tw/post/Uva10625/';
+                 this.page.url = 'http://blog.halloworld.ga/post/Uva10625/';
                  
                     this.page.identifier = 'post/Uva10625/';
                  
