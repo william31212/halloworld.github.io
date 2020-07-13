@@ -203,6 +203,78 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/post/2020-Summer-Vacation-02/">
+                            2020_Summer_Vacation_02
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2020-07-13T10:16:05+08:00">
+	
+		    7月 13, 2020
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="專題"><a href="#專題" class="headerlink" title="專題"></a>專題</h2><h3 id="研究遊戲物理"><a href="#研究遊戲物理" class="headerlink" title="研究遊戲物理"></a>研究遊戲物理</h3><h4 id="GDC2006-Box-2d-Lite"><a href="#GDC2006-Box-2d-Lite" class="headerlink" title="GDC2006 - Box-2d-Lite"></a>GDC2006 - Box-2d-Lite</h4><ul>
+<li>為了專題，本人去啃了GDC的演講，結果感覺像是複習高中物理一樣</li>
+<li>主要是透過實際的物理，去讓遊戲世界更像真實世界的行為，想要深入研究的同胞們可以參考以下我整理之共筆<ul>
+<li><a href="https://hackmd.io/@pinhan/SksaERrkP/https%3A%2F%2Fgithub.com%2Ferincatto%2Fbox2d" target="_blank" rel="noopener">https://hackmd.io/@pinhan/SksaERrkP/https%3A%2F%2Fgithub.com%2Ferincatto%2Fbox2d</a></li>
+</ul>
+</li>
+<li>本周希望能研究出source-code的細節，看自己能不能嘗試實作一個小東西出來</li>
+</ul>
+<h4 id="GDC"><a href="#GDC" class="headerlink" title="GDC"></a>GDC</h4><ul>
+<li>全名為Game Developer Conference，遊戲開發者論壇</li>
+<li>對遊戲開發有興趣的人可以多看這些演講，不過全部都是英文的，有些真的有點難道懷疑人生QQ</li>
+</ul>
+<blockquote>
+<p>遊戲開發是個大坑，跳下去才發現到新世界</p>
+</blockquote>
+<h2 id="Side-Project-Telegram-Bot"><a href="#Side-Project-Telegram-Bot" class="headerlink" title="Side-Project - Telegram-Bot"></a>Side-Project - Telegram-Bot</h2><h3 id="動機"><a href="#動機" class="headerlink" title="動機"></a>動機</h3><ul>
+<li>最近用了Python寫了一套能夠幫我爬學校暫存成績的Bot</li>
+<li>每次都要重新去學校官網登入成績真的很麻煩，乾脆直接寫一個Bot，簡化動作</li>
+</ul>
+<h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><ul>
+<li>主要使用了python-telegram這項套件，藉由綁定webhook，使伺服器端與bot相互溝通，再透過爬蟲將資料傳給bot</li>
+<li>有興趣的同胞們可以參考以下連結，其實網路上蠻多範例可以參考<ul>
+<li><a href="https://hackmd.io/acqnlwf6T-Cn4lvb9xAxIw?both" target="_blank" rel="noopener">https://hackmd.io/acqnlwf6T-Cn4lvb9xAxIw?both</a></li>
+</ul>
+</li>
+<li>Sample<ul>
+<li><img src="https://i.imgur.com/lBY6Sbl.png" alt></li>
+</ul>
+</li>
+</ul>
+
+                    
+                        
+
+                    
+                    
+                        <p>
+                            <a href="/post/2020-Summer-Vacation-02/#post-footer" class="postShorten-excerpt_link link">
+                                留言與分享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/post/2020-Summer-Vacation-01/">
                             2020_Summer_Vacation_01
                         </a>
@@ -1195,71 +1267,6 @@
                     
                         <p>
                             <a href="/post/2019-pico-ctf-reverse-writeup/#post-footer" class="postShorten-excerpt_link link">
-                                留言與分享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/post/Uva10684/">
-                            Uva10684 The jackpot
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-08-14T15:27:53+08:00">
-	
-		    8月 14, 2019
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <ul>
-<li>題目</li>
-</ul>
-<ol>
-<li>要找到連續賭局最大可能贏到的錢，正代表獲勝，負責代表輸錢</li>
-<li>如果都是輸錢就印出Losing streak.</li>
-</ol>
-<ul>
-<li><p>題目思路</p>
-<ul>
-<li>用dp記錄目前到此局能贏取最多錢的數目，與當格比，如果當格較大就從他開始取</li>
-<li>ex: -1,2,3，紀錄到2的時候，如果取-1,2只能贏一塊錢，所以我們選擇只取2，該格的dp就紀錄2</li>
-</ul>
-</li>
-<li><p>code</p>
-</li>
-</ul>
-<blockquote>
-<p>這題自己沒有想出來，我的dp還是有障礙</p>
-</blockquote>
-<ul>
-<li><a href="https://github.com/william31212/uva/blob/master/uva10684/uva10684.cpp" target="_blank" rel="noopener">https://github.com/william31212/uva/blob/master/uva10684/uva10684.cpp</a></li>
-</ul>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/post/Uva10684/#post-footer" class="postShorten-excerpt_link link">
                                 留言與分享
                             </a>
                         </p>
