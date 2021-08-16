@@ -4,7 +4,7 @@ language: node_js
 sudo: false
 # 設置node_js版本
 node_js:
-  - '14.17.5'
+  - '10.24.1'
 # 設置暫存區塊
 cache:
   apt: true
@@ -26,7 +26,7 @@ script:
 deploy:
   provider: pages
   skip-cleanup: true
-  github-token: $GITHUB_TOKEN
+  github-token: $GITHUBHEXO_TOKEN
   local-dir: public
   keep-history: false
   on:
