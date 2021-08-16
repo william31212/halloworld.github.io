@@ -28,6 +28,6 @@ deploy:
   skip-cleanup: true
   github-token: $GITHUBHEXO_TOKEN
   local-dir: public
-  keep-history: false
+  keep-history: true
   on:
     branch: master
