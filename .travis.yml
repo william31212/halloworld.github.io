@@ -20,8 +20,14 @@ before_script:
 # 清除緩存並執行編譯
 script:
   - hexo clean
-  - hexo generate
+  - hexo g
+  - echo "blog.halloworldis.me" > ./public/CNAME
 ## deploy 相關設置
-after_success:
-  - sed -i'' "/^ *repo/s~github\.com~${GITHUBHEXO_TOKEN}@github.com~" _config.yml
-  - hexo deploy
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: public
+  keep-history: false
+  on:
+    branch: master
