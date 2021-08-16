@@ -1,0 +1,537 @@
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+    
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Halloworld&#39;s Website">
+    <title>Editblog - font - Halloworld&#39;s Website</title>
+    <meta name="author" content="halloworld">
+    
+    
+        <link rel="icon" href="https://blog.halloworldis.me/assets/images/favicon.ico">
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"\nhexo-tranquilpeak調整字體動機\n因為原本英文字體我看得很不習慣，他是Merriweather，於是想要改它\n示意圖\n\n\n\n\n過程\n嘗試過docs裡面改字體的方法，不過沒有成功，於是直接朝向css下手\n透過Chrome的開發者工具，能夠知道它實際css的位置\n\n\n\n必須更改source/theme/assets/style-c4ozc........css，如果改public的，下一次hexo generate會將記錄洗掉\n\n\n\n改的位置在.postShorten .postShorten-content, .postShorten .postShorten-excerpt\n\n\n\nhexo g發布後即可更改\n\n採坑\nChrome很像會紀錄之前的css，導致我一直以為我沒改成功，打開無痕後發現有改成功，字體為medium-content-serif-font\n\n\n\n\n解法\nF12打開開發者工具，接著在reload icon按下右鍵，強制重整\n\n\n\n\n參考自: https://caloskao.org/chrome-%E6%B8%85%E9%99%A4%E5%BF%AB%E5%8F%96%E7%9A%84%E4%B8%89%E7%A8%AE%E6%96%B9%E6%B3%95/\n\n","dateCreated":"2020-06-28T05:16:47+00:00","dateModified":"2021-08-16T14:29:22+00:00","datePublished":"2020-06-28T05:16:47+00:00","description":"部落格字體調整紀實","headline":"Editblog - font","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.halloworldis.me/post/Editblog - font/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://blog.halloworldis.me/post/Editblog - font/","keywords":"font, blog, tranquilpeak"}</script>
+    <meta name="description" content="部落格字體調整紀實">
+<meta name="keywords" content="font,blog,tranquilpeak">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Editblog - font">
+<meta property="og:url" content="https://blog.halloworldis.me/post/Editblog - font/index.html">
+<meta property="og:site_name" content="Halloworld&#39;s Website">
+<meta property="og:description" content="部落格字體調整紀實">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://i.imgur.com/iRSoP4H.png">
+<meta property="og:image" content="https://i.imgur.com/KBBWiuS.png">
+<meta property="og:image" content="https://i.imgur.com/fU55nyt.png">
+<meta property="og:image" content="https://i.imgur.com/STJF2Wd.png">
+<meta property="og:image" content="https://i.imgur.com/di3UlOn.pngf">
+<meta property="og:image" content="https://i.imgur.com/lsevPPx.png">
+<meta property="og:updated_time" content="2021-08-16T14:29:22.473Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Editblog - font">
+<meta name="twitter:description" content="部落格字體調整紀實">
+<meta name="twitter:image" content="https://i.imgur.com/iRSoP4H.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://blog.halloworldis.me/assets/images/profile.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-i6qxnw8lyuayqkgwzfzxbkvcbehg2ek4zyrszsej0bzazp4cwq9cx1jrwpyh.min.css">
+    <!--STYLES END-->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135083609-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-135083609-1');
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+</head>
+
+    <body>
+        <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Halloworld&#39;s Website</a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/profile.jpg" alt="作者的圖片">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="作者的圖片">
+                </a>
+                <h4 class="sidebar-profile-name">halloworld</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Everything is a process, Life is Struggle.</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/ " title="首頁">
+                    
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首頁</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" title="分類">
+                    
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分類</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" title="標籤">
+                    
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">標籤</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" title="所有文章">
+                    
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">所有文章</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/about" title="關於">
+                    
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">關於</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/william31212" target="_blank" rel="noopener" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://www.facebook.com/pinhan.huang.5" target="_blank" rel="noopener" title="Facebook">
+                    
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/" target="_blank" rel="noopener" title="LinkedIn">
+                    
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://www.instagram.com/pinhan0601/?hl=zh-tw" target="_blank" rel="noopener" title="instagram">
+                    
+                        <i class="sidebar-button-icon fab fa-instagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">instagram</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            Editblog - font
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2020-06-28T05:16:47+00:00">
+	
+		    6月 28, 2020
+    	
+    </time>
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <!-- excerpt --><p></p>
+<h2 id="hexo-tranquilpeak調整字體"><a href="#hexo-tranquilpeak調整字體" class="headerlink" title="hexo-tranquilpeak調整字體"></a>hexo-tranquilpeak調整字體</h2><h3 id="動機"><a href="#動機" class="headerlink" title="動機"></a>動機</h3><ul>
+<li>因為原本英文字體我看得很不習慣，他是<code>Merriweather</code>，於是想要改它</li>
+<li>示意圖<ul>
+<li><img src="https://i.imgur.com/iRSoP4H.png" alt></li>
+</ul>
+</li>
+</ul>
+<h3 id="過程"><a href="#過程" class="headerlink" title="過程"></a>過程</h3><ul>
+<li>嘗試過docs裡面改字體的方法，不過沒有成功，於是直接朝向css下手</li>
+<li>透過Chrome的開發者工具，能夠知道它實際css的位置<ul>
+<li><img src="https://i.imgur.com/KBBWiuS.png" alt></li>
+</ul>
+</li>
+<li>必須更改<code>source/theme/assets/style-c4ozc........css</code>，如果改public的，下一次<code>hexo generate</code>會將記錄洗掉<ul>
+<li><img src="https://i.imgur.com/fU55nyt.png" alt></li>
+</ul>
+</li>
+<li>改的位置在<code>.postShorten .postShorten-content, .postShorten .postShorten-excerpt</code><ul>
+<li><img src="https://i.imgur.com/STJF2Wd.png" alt></li>
+</ul>
+</li>
+<li><code>hexo g</code>發布後即可更改</li>
+</ul>
+<h3 id="採坑"><a href="#採坑" class="headerlink" title="採坑"></a>採坑</h3><ul>
+<li>Chrome很像會紀錄之前的<code>css</code>，導致我一直以為我沒改成功，打開無痕後發現有改成功，字體為<code>medium-content-serif-font</code><ul>
+<li><img src="https://i.imgur.com/di3UlOn.pngf" alt></li>
+</ul>
+</li>
+</ul>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><ul>
+<li><p><code>F12</code>打開開發者工具，接著在<code>reload icon</code>按下右鍵，強制重整</p>
+<ul>
+<li><img src="https://i.imgur.com/lsevPPx.png" alt></li>
+</ul>
+</li>
+<li><p>參考自: <a href="https://caloskao.org/chrome-%E6%B8%85%E9%99%A4%E5%BF%AB%E5%8F%96%E7%9A%84%E4%B8%89%E7%A8%AE%E6%96%B9%E6%B3%95/" target="_blank" rel="noopener">https://caloskao.org/chrome-%E6%B8%85%E9%99%A4%E5%BF%AB%E5%8F%96%E7%9A%84%E4%B8%89%E7%A8%AE%E6%96%B9%E6%B3%95/</a></p>
+</li>
+</ul>
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">標籤</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/blog/">blog</a> <a class="tag tag--primary tag--small t-link" href="/tags/font/">font</a> <a class="tag tag--primary tag--small t-link" href="/tags/tranquilpeak/">tranquilpeak</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/2020-Summer-Vacation-00/" data-tooltip="2020_Summer_Vacation_00" aria-label="上一篇: 2020_Summer_Vacation_00">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/AIS3-2020-pre-exam-writeup/" data-tooltip="Ais3_2020_pre_exam_writeup" aria-label="下一篇: Ais3_2020_pre_exam_writeup">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <!-- <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.halloworldis.me/post/Editblog - font/" title="分享到 Facebook">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li> -->
+        
+            
+            
+            <!-- <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://blog.halloworldis.me/post/Editblog - font/" title="分享到 Google+">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li> -->
+        
+        
+            
+                <li class="post-action">
+                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                        <i class="fa fa-comment"></i>
+                    </a>
+                </li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 halloworld. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/2020-Summer-Vacation-00/" data-tooltip="2020_Summer_Vacation_00" aria-label="上一篇: 2020_Summer_Vacation_00">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/AIS3-2020-pre-exam-writeup/" data-tooltip="Ais3_2020_pre_exam_writeup" aria-label="下一篇: Ais3_2020_pre_exam_writeup">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <!-- <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.halloworldis.me/post/Editblog - font/" title="分享到 Facebook">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li> -->
+        
+            
+            
+            <!-- <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://blog.halloworldis.me/post/Editblog - font/" title="分享到 Google+">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li> -->
+        
+        
+            
+                <li class="post-action">
+                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                        <i class="fa fa-comment"></i>
+                    </a>
+                </li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.halloworldis.me/post/Editblog - font/">
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>分享到 Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://blog.halloworldis.me/post/Editblog - font/">
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="作者的圖片">
+        
+            <h4 id="about-card-name">halloworld</h4>
+        
+            <div id="about-card-bio"><p>Everything is a process, Life is Struggle.</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>NTHU’s Graduate Student</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                NewTaipei
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/trail.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-mplpb3y74nzgyjjuzmxjynbbsvzvjnongjo1iipkdfgk27nxr3d9nkljkimq.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'https://blog.halloworldis.me/post/Editblog - font/';
+                 
+                    this.page.identifier = 'post/Editblog - font/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'halloworld';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+
+
+    </body>
+</html>
