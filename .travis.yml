@@ -19,6 +19,7 @@ before_script:
   - npm install hexo-cli -g  # 安裝 Hexo 環境
 # 清除緩存並執行編譯
 script:
+  - pushd ./themes/tranquilpeak && npm install && npm prod && popd
   - hexo clean
   - hexo g
   - echo "blog.halloworldis.me" > ./public/CNAME
