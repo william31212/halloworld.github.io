@@ -13,7 +13,7 @@
         <link rel="icon" href="https://blog.halloworldis.me/assets/images/favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"\n寫題解讓自己可以review一次自己寫了甚麼…幾百年沒刷題，程式能力依然爛QQ\n\n\n題目\n\n\n有一段字串需要照他的規定做轉換，例如例題的G就要換成GNU’s\n給了原字串要問經過幾次轉換，他詢問的該個字母有幾個，最多轉換10000次\n每個答案要間隔一個換行\n\n\n解題思路\n\n因為題目只是將一個字母轉換成字串，因此我們只需要計算每個字母在每次轉換的總數有幾個，不需照著做轉換。\n而題目有提到會出現的字元Ascii是從33~126之間，因此只要維護一個dp表格(我是直接開200)\n用tmp紀錄字母在轉換時會增加多少個不同的字母數量，接著看上一層狀態該個字母有多少就乘以他的幾倍，紀錄到下一格狀態\n如果紀錄每次狀態，陣列空間會太大，因此每次轉換過後，需要將結果狀態回灌給上一層，這樣只需要兩層的空間。\n\n\ncode\n\nhttps://github.com/william31212/uva/blob/master/uva10625/uva10625.cpp\n\n\n\n","dateCreated":"2019-08-14T06:52:19+00:00","dateModified":"2021-08-16T15:47:13+00:00","datePublished":"2019-08-14T06:52:19+00:00","description":"","headline":"Uva10625 GNU = GNU'sNotUnix","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.halloworldis.me/post/Uva10625/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://blog.halloworldis.me/post/Uva10625/","keywords":"uva, dp, string"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"\n寫題解讓自己可以review一次自己寫了甚麼…幾百年沒刷題，程式能力依然爛QQ\n\n\n題目\n\n\n有一段字串需要照他的規定做轉換，例如例題的G就要換成GNU’s\n給了原字串要問經過幾次轉換，他詢問的該個字母有幾個，最多轉換10000次\n每個答案要間隔一個換行\n\n\n解題思路\n\n因為題目只是將一個字母轉換成字串，因此我們只需要計算每個字母在每次轉換的總數有幾個，不需照著做轉換。\n而題目有提到會出現的字元Ascii是從33~126之間，因此只要維護一個dp表格(我是直接開200)\n用tmp紀錄字母在轉換時會增加多少個不同的字母數量，接著看上一層狀態該個字母有多少就乘以他的幾倍，紀錄到下一格狀態\n如果紀錄每次狀態，陣列空間會太大，因此每次轉換過後，需要將結果狀態回灌給上一層，這樣只需要兩層的空間。\n\n\ncode\n\nhttps://github.com/william31212/uva/blob/master/uva10625/uva10625.cpp\n\n\n\n","dateCreated":"2019-08-14T06:52:19+00:00","dateModified":"2021-08-25T06:55:52+00:00","datePublished":"2019-08-14T06:52:19+00:00","description":"","headline":"Uva10625 GNU = GNU'sNotUnix","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.halloworldis.me/post/Uva10625/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://blog.halloworldis.me/post/Uva10625/","keywords":"uva, dp, string"}</script>
     <meta name="description" content="寫題解讓自己可以review一次自己寫了甚麼…幾百年沒刷題，程式能力依然爛QQ   題目   有一段字串需要照他的規定做轉換，例如例題的G就要換成GNU’s 給了原字串要問經過幾次轉換，他詢問的該個字母有幾個，最多轉換10000次 每個答案要間隔一個換行   解題思路  因為題目只是將一個字母轉換成字串，因此我們只需要計算每個字母在每次轉換的總數有幾個，不需照著做轉換。 而題目有提到會出現的字元">
 <meta name="keywords" content="uva,dp,string">
 <meta property="og:type" content="blog">
@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Halloworld&#39;s Website">
 <meta property="og:description" content="寫題解讓自己可以review一次自己寫了甚麼…幾百年沒刷題，程式能力依然爛QQ   題目   有一段字串需要照他的規定做轉換，例如例題的G就要換成GNU’s 給了原字串要問經過幾次轉換，他詢問的該個字母有幾個，最多轉換10000次 每個答案要間隔一個換行   解題思路  因為題目只是將一個字母轉換成字串，因此我們只需要計算每個字母在每次轉換的總數有幾個，不需照著做轉換。 而題目有提到會出現的字元">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2021-08-16T15:47:13.604Z">
+<meta property="og:updated_time" content="2021-08-25T06:55:52.616Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Uva10625 GNU = GNU&#39;sNotUnix">
 <meta name="twitter:description" content="寫題解讓自己可以review一次自己寫了甚麼…幾百年沒刷題，程式能力依然爛QQ   題目   有一段字串需要照他的規定做轉換，例如例題的G就要換成GNU’s 給了原字串要問經過幾次轉換，他詢問的該個字母有幾個，最多轉換10000次 每個答案要間隔一個換行   解題思路  因為題目只是將一個字母轉換成字串，因此我們只需要計算每個字母在每次轉換的總數有幾個，不需照著做轉換。 而題目有提到會出現的字元">
@@ -37,7 +37,7 @@
     
     
     <!--STYLES-->
-    <link rel="stylesheet" href="/assets/css/style-rveh1ex7ggy1zes5oktzuatu5aopmcwo0vhtr4msandff6xgfegkz8ygky2u.min.css">
+    <link rel="stylesheet" href="/assets/css/style-vixopcscznjlvilsw3wmaiykvvl37j03ssp55igrlx552tjke8wmk1ymj17q.min.css">
     <!--STYLES END-->
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135083609-1"></script>
@@ -64,7 +64,7 @@
         
     
 
-<header id="header" data-behavior="4">
+<header id="header" data-behavior="5">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">Halloworld&#39;s Website</a>
@@ -87,7 +87,7 @@
         
     
 
-<nav id="sidebar" data-behavior="4">
+<nav id="sidebar" data-behavior="5">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -195,7 +195,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="4"
+            <div id="main" data-behavior="5"
                  class="
                         hasCoverMetaIn
                         ">
@@ -353,7 +353,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
                     <div class="post-actions-wrap">
     <nav>
         <ul class="post-actions post-action-nav">
@@ -422,7 +422,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -490,7 +490,7 @@
         
 <div id="cover" style="background-image:url('/assets/images/trail.jpg');"></div>
         <!--SCRIPTS-->
-<script src="/assets/js/script-vlutac8qw3qkmi56u6i5dtqe2gzesmvymopn3ruyz7xalxh2haw4eaphzebh.min.js"></script>
+<script src="/assets/js/script-g8uyy7j5uildgewbc4gvivatsclnrjhr4jxswio3ixjinn15irb442pxhxmm.min.js"></script>
 <!--SCRIPTS END-->
 
     
