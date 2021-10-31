@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+    
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Halloworld&#39;s Website">
+    <title>RouterOS-OVPN-Setting - Halloworld&#39;s Website</title>
+    <meta name="author" content="halloworld">
+    
+    
+        <link rel="icon" href="https://blog.halloworldis.me/assets/images/favicon.png">
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"\nRouterOS 自架 OpenVPN型號 / 版本\nMitrotik hAP ac² / RouterOS v6.47.10 / $2730 TWD\n因為有 VPN 需求，而從蝦皮購入此台 Router，此台有 AP 功能\n\n產憑證\n因為 OpenVPN 要求要有憑證才能連線，因此必須產憑證給它\n透過 Openssl 自產憑證，餵給 RouterOS\n\n1234# 使用 RSA 演算法產生 2048 bit 長度私鑰 (ca.key)openssl genrsa -out ca.key 2048# 簽發憑證 (ca.crt)openssl req -new -x509 -key ca.key -out ca.crt\n餵憑證\n開 Files，把 ca.crt跟 ca.key 匯入\n\n開terminal，匯入到 System 中的 Cerificates\n\n\n\n這邊利用 cli 進行匯入， 因為用GUI的我一直失敗\n\n123456789101112131415161718/certificate import file-name=ca.crt# outputpassphrase:     certificates-imported: 1    private-keys-imported: 0           files-imported: 1      decryption-failures: 0 keys-with-no-certificate: 0/certificate import file-name=ca.key# outputpassphrase:     certificates-imported: 0    private-keys-imported: 1           files-imported: 1      decryption-failures: 0 keys-with-no-certificate: 0\nPPP 設定 OVPN Server\n12345678910111213# 設定一段ip段 10.10.0.1-10.10.0.254，準備給 VPN 發的時候使用/ip pool add name=ovpn_pool ranges=10.10.0.1-10.10.0.254# remote-address: OpenVPN 發給 Client 端的 IP# local-address: OpenVPN 連線後，在 Server端 的 IP# 在此筆者都是使用 ovpn_pool (10.10.0.1-10.10.0.254)/ppp profile add local-address=ovpn_pool name=ovpn remote-address=ovpn_pool# 設定 ovpn-server 的憑證/interface ovpn-server server set certificate=ca.crt_0 cipher=aes256 default-profile=ovpn enabled=yes netmask=16# 設定Client端的帳號密碼/ppp secret add name=&lt;VPN帳號設定&gt; password=&lt;VPN密碼設定&gt; profile=ovpn service=ovpn\n\n將 Require Client Certificate 取消，才能在不把key放在 .ovpn 進行連線\n\n\nClient 端設定\n自行寫設定檔，副檔名請使用.ovpn結尾\n\n以下為設定檔範例，&lt;&gt;為抽換的位置\n1234567891011121314151617clientdev tunproto tcpremote &lt;VPN外部IP&gt; &lt;VPN外部Port&gt;auth-user-passauth SHA1cipher AES-256-CBCverb 5redirect-gateway def1dhcp-option DNS 1.1.1.1auth-user-pass&lt;ca&gt;-----BEGIN CERTIFICATE-----&lt;將ca.crt內容複製到這裡&gt;-----END CERTIFICATE-----&lt;/ca&gt;\n\n\n\n參考自: https://blog.ladsai.com/routeros-openvpn-server-client-%E8%A8%AD%E5%AE%9A.html\n","dateCreated":"2021-10-31T02:06:23+00:00","dateModified":"2021-10-31T02:59:06+00:00","datePublished":"2021-10-31T02:06:23+00:00","description":"RouterOS 自架 OpenVPN","headline":"RouterOS-OVPN-Setting","image":["https://i.mt.lv/cdn/rb_images/1471_hi_res.png"],"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.halloworldis.me/post/RouterOS-OVPN-Setting/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://blog.halloworldis.me/post/RouterOS-OVPN-Setting/","keywords":"RouterOS, Mitrotik, OpenVPN","thumbnailUrl":"https://i.mt.lv/cdn/rb_images/1471_hi_res.png"}</script>
+    <meta name="description" content="RouterOS 自架 OpenVPN">
+<meta name="keywords" content="RouterOS,Mitrotik,OpenVPN">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="RouterOS-OVPN-Setting">
+<meta property="og:url" content="https://blog.halloworldis.me/post/RouterOS-OVPN-Setting/index.html">
+<meta property="og:site_name" content="Halloworld&#39;s Website">
+<meta property="og:description" content="RouterOS 自架 OpenVPN">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://i.imgur.com/toiGhtV.png">
+<meta property="og:image" content="https://i.imgur.com/CNnXdQK.png">
+<meta property="og:image" content="https://i.imgur.com/n5YWWSW.png">
+<meta property="og:image" content="https://i.imgur.com/54cr8jA.png">
+<meta property="og:updated_time" content="2021-10-31T02:59:06.941Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RouterOS-OVPN-Setting">
+<meta name="twitter:description" content="RouterOS 自架 OpenVPN">
+<meta name="twitter:image" content="https://i.imgur.com/toiGhtV.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://blog.halloworldis.me/assets/images/profile.jpg"/>
+    
+    
+        <meta property="og:image" content="https://i.mt.lv/cdn/rb_images/1471_hi_res.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.mt.lv/cdn/rb_images/1471_hi_res.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-hkkeq1yb2elw2ahs6a7hwlp544eksvbjatxutpqf4wt9bbcocwgox9ngw1md.min.css">
+    <!--STYLES END-->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135083609-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-135083609-1');
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+</head>
+
+    <body>
+        <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Halloworld&#39;s Website</a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/profile.jpg" alt="作者的圖片">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="作者的圖片">
+                </a>
+                <h4 class="sidebar-profile-name">halloworld</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Everything is a process, Life is Struggle.</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/ " title="首頁">
+                    
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首頁</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" title="分類">
+                    
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分類</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" title="標籤">
+                    
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">標籤</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" title="所有文章">
+                    
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">所有文章</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/about" title="關於">
+                    
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">關於</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/william31212" target="_blank" rel="noopener" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://www.facebook.com/pinhan.huang.5" target="_blank" rel="noopener" title="Facebook">
+                    
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/" target="_blank" rel="noopener" title="LinkedIn">
+                    
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://www.instagram.com/pinhan0601/?hl=zh-tw" target="_blank" rel="noopener" title="instagram">
+                    
+                        <i class="sidebar-button-icon fab fa-instagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">instagram</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            RouterOS-OVPN-Setting
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2021-10-31T02:06:23+00:00">
+	
+		    10月 31, 2021
+    	
+    </time>
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <!-- excerpt --><p></p>
+<h1 id="RouterOS-自架-OpenVPN"><a href="#RouterOS-自架-OpenVPN" class="headerlink" title="RouterOS 自架 OpenVPN"></a>RouterOS 自架 OpenVPN</h1><h2 id="型號-版本"><a href="#型號-版本" class="headerlink" title="型號 / 版本"></a>型號 / 版本</h2><ul>
+<li>Mitrotik hAP ac² / RouterOS v6.47.10 / $2730 TWD</li>
+<li>因為有 VPN 需求，而從蝦皮購入此台 Router，此台有 AP 功能</li>
+</ul>
+<h2 id="產憑證"><a href="#產憑證" class="headerlink" title="產憑證"></a>產憑證</h2><ul>
+<li>因為 <code>OpenVPN</code> 要求要有憑證才能連線，因此必須產憑證給它</li>
+<li>透過 <code>Openssl</code> 自產憑證，餵給 <code>RouterOS</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 使用 RSA 演算法產生 2048 bit 長度私鑰 (ca.key)</span><br><span class="line">openssl genrsa -out ca.key 2048</span><br><span class="line"># 簽發憑證 (ca.crt)</span><br><span class="line">openssl req -new -x509 -key ca.key -out ca.crt</span><br></pre></td></tr></table></figure>
+<h2 id="餵憑證"><a href="#餵憑證" class="headerlink" title="餵憑證"></a>餵憑證</h2><ul>
+<li><p>開 Files，把 <code>ca.crt</code>跟 <code>ca.key</code> 匯入<br><img src="https://i.imgur.com/toiGhtV.png" alt="Upload"></p>
+</li>
+<li><p>開terminal，匯入到 System 中的 Cerificates</p>
+</li>
+</ul>
+<blockquote>
+<p>這邊利用 cli 進行匯入， 因為用GUI的我一直失敗<br><img src="https://i.imgur.com/CNnXdQK.png" alt="Terminal"></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/certificate import file-name=ca.crt</span><br><span class="line"># output</span><br><span class="line">passphrase: </span><br><span class="line">    certificates-imported: 1</span><br><span class="line">    private-keys-imported: 0</span><br><span class="line">           files-imported: 1</span><br><span class="line">      decryption-failures: 0</span><br><span class="line"> keys-with-no-certificate: 0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/certificate import file-name=ca.key</span><br><span class="line"># output</span><br><span class="line">passphrase: </span><br><span class="line">    certificates-imported: 0</span><br><span class="line">    private-keys-imported: 1</span><br><span class="line">           files-imported: 1</span><br><span class="line">      decryption-failures: 0</span><br><span class="line"> keys-with-no-certificate: 0</span><br></pre></td></tr></table></figure>
+<h2 id="PPP-設定-OVPN-Server"><a href="#PPP-設定-OVPN-Server" class="headerlink" title="PPP 設定 OVPN Server"></a>PPP 設定 OVPN Server</h2><p><img src="https://i.imgur.com/n5YWWSW.png" alt="Image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 設定一段ip段 10.10.0.1-10.10.0.254，準備給 VPN 發的時候使用</span><br><span class="line">/ip pool add name=ovpn_pool ranges=10.10.0.1-10.10.0.254</span><br><span class="line"></span><br><span class="line"># remote-address: OpenVPN 發給 Client 端的 IP</span><br><span class="line"># local-address: OpenVPN 連線後，在 Server端 的 IP</span><br><span class="line"># 在此筆者都是使用 ovpn_pool (10.10.0.1-10.10.0.254)</span><br><span class="line">/ppp profile add local-address=ovpn_pool name=ovpn remote-address=ovpn_pool</span><br><span class="line"></span><br><span class="line"># 設定 ovpn-server 的憑證</span><br><span class="line">/interface ovpn-server server set certificate=ca.crt_0 cipher=aes256 default-profile=ovpn enabled=yes netmask=16</span><br><span class="line"></span><br><span class="line"># 設定Client端的帳號密碼</span><br><span class="line">/ppp secret add name=&lt;VPN帳號設定&gt; password=&lt;VPN密碼設定&gt; profile=ovpn service=ovpn</span><br></pre></td></tr></table></figure>
+<ul>
+<li>將 Require Client Certificate 取消，才能在不把key放在 <code>.ovpn</code> 進行連線</li>
+</ul>
+<p><img src="https://i.imgur.com/54cr8jA.png" alt="Image"></p>
+<h2 id="Client-端設定"><a href="#Client-端設定" class="headerlink" title="Client 端設定"></a>Client 端設定</h2><ul>
+<li><p>自行寫設定檔，副檔名請使用<code>.ovpn</code>結尾</p>
+</li>
+<li><p>以下為設定檔範例，<code>&lt;&gt;</code>為抽換的位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">client</span><br><span class="line">dev tun</span><br><span class="line">proto tcp</span><br><span class="line">remote &lt;VPN外部IP&gt; &lt;VPN外部Port&gt;</span><br><span class="line">auth-user-pass</span><br><span class="line">auth SHA1</span><br><span class="line">cipher AES-256-CBC</span><br><span class="line">verb 5</span><br><span class="line">redirect-gateway def1</span><br><span class="line">dhcp-option DNS 1.1.1.1</span><br><span class="line">auth-user-pass</span><br><span class="line"></span><br><span class="line">&lt;ca&gt;</span><br><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">&lt;將ca.crt內容複製到這裡&gt;</span><br><span class="line">-----END CERTIFICATE-----</span><br><span class="line">&lt;/ca&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>參考自: <a href="https://blog.ladsai.com/routeros-openvpn-server-client-%E8%A8%AD%E5%AE%9A.html" target="_blank" rel="noopener">https://blog.ladsai.com/routeros-openvpn-server-client-%E8%A8%AD%E5%AE%9A.html</a></p>
+</blockquote>
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">標籤</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Mitrotik/">Mitrotik</a> <a class="tag tag--primary tag--small t-link" href="/tags/OpenVPN/">OpenVPN</a> <a class="tag tag--primary tag--small t-link" href="/tags/RouterOS/">RouterOS</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/2020榮耀資戰/" data-tooltip="2020_榮耀資戰" aria-label="下一篇: 2020_榮耀資戰">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <!-- <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.halloworldis.me/post/RouterOS-OVPN-Setting/" title="分享到 Facebook">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li> -->
+        
+            
+            
+            <!-- <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://blog.halloworldis.me/post/RouterOS-OVPN-Setting/" title="分享到 Google+">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li> -->
+        
+        
+            
+                <li class="post-action">
+                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                        <i class="fa fa-comment"></i>
+                    </a>
+                </li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 halloworld. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/post/2020榮耀資戰/" data-tooltip="2020_榮耀資戰" aria-label="下一篇: 2020_榮耀資戰">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <!-- <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.halloworldis.me/post/RouterOS-OVPN-Setting/" title="分享到 Facebook">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li> -->
+        
+            
+            
+            <!-- <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://blog.halloworldis.me/post/RouterOS-OVPN-Setting/" title="分享到 Google+">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li> -->
+        
+        
+            
+                <li class="post-action">
+                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                        <i class="fa fa-comment"></i>
+                    </a>
+                </li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.halloworldis.me/post/RouterOS-OVPN-Setting/">
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>分享到 Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://blog.halloworldis.me/post/RouterOS-OVPN-Setting/">
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="作者的圖片">
+        
+            <h4 id="about-card-name">halloworld</h4>
+        
+            <div id="about-card-bio"><p>Everything is a process, Life is Struggle.</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>NTHU’s Graduate Student</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                NewTaipei
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/trail.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-s2otpoqjka457mu6yfjapsnz7gyj09v4pjczurpasdiozhlvj0qctz1fqega.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'https://blog.halloworldis.me/post/RouterOS-OVPN-Setting/';
+                 
+                    this.page.identifier = 'post/RouterOS-OVPN-Setting/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'halloworld';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+
+
+
+    </body>
+</html>
