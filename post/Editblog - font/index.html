@@ -13,7 +13,7 @@
         <link rel="icon" href="https://blog.halloworldis.me/assets/images/favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"\nhexo-tranquilpeak調整字體動機\n因為原本英文字體我看得很不習慣，他是Merriweather，於是想要改它\n示意圖\n\n\n\n\n過程\n嘗試過docs裡面改字體的方法，不過沒有成功，於是直接朝向css下手\n透過Chrome的開發者工具，能夠知道它實際css的位置\n\n\n\n必須更改source/theme/assets/style-c4ozc........css，如果改public的，下一次hexo generate會將記錄洗掉\n\n\n\n改的位置在.postShorten .postShorten-content, .postShorten .postShorten-excerpt\n\n\n\nhexo g發布後即可更改\n\n採坑\nChrome很像會紀錄之前的css，導致我一直以為我沒改成功，打開無痕後發現有改成功，字體為medium-content-serif-font\n\n\n\n\n解法\nF12打開開發者工具，接著在reload icon按下右鍵，強制重整\n\n\n\n\n參考自: https://caloskao.org/chrome-%E6%B8%85%E9%99%A4%E5%BF%AB%E5%8F%96%E7%9A%84%E4%B8%89%E7%A8%AE%E6%96%B9%E6%B3%95/\n\n","dateCreated":"2020-06-28T05:16:47+00:00","dateModified":"2021-10-31T02:59:06+00:00","datePublished":"2020-06-28T05:16:47+00:00","description":"部落格字體調整紀實","headline":"Editblog - font","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.halloworldis.me/post/Editblog - font/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://blog.halloworldis.me/post/Editblog - font/","keywords":"font, blog, tranquilpeak"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"\nhexo-tranquilpeak調整字體動機\n因為原本英文字體我看得很不習慣，他是Merriweather，於是想要改它\n示意圖\n\n\n\n\n過程\n嘗試過docs裡面改字體的方法，不過沒有成功，於是直接朝向css下手\n透過Chrome的開發者工具，能夠知道它實際css的位置\n\n\n\n必須更改source/theme/assets/style-c4ozc........css，如果改public的，下一次hexo generate會將記錄洗掉\n\n\n\n改的位置在.postShorten .postShorten-content, .postShorten .postShorten-excerpt\n\n\n\nhexo g發布後即可更改\n\n採坑\nChrome很像會紀錄之前的css，導致我一直以為我沒改成功，打開無痕後發現有改成功，字體為medium-content-serif-font\n\n\n\n\n解法\nF12打開開發者工具，接著在reload icon按下右鍵，強制重整\n\n\n\n\n參考自: https://caloskao.org/chrome-%E6%B8%85%E9%99%A4%E5%BF%AB%E5%8F%96%E7%9A%84%E4%B8%89%E7%A8%AE%E6%96%B9%E6%B3%95/\n\n","dateCreated":"2020-06-28T05:16:47+00:00","dateModified":"2022-01-12T17:02:18+00:00","datePublished":"2020-06-28T05:16:47+00:00","description":"部落格字體調整紀實","headline":"Editblog - font","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.halloworldis.me/post/Editblog - font/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://blog.halloworldis.me/post/Editblog - font/","keywords":"font, blog, tranquilpeak"}</script>
     <meta name="description" content="部落格字體調整紀實">
 <meta name="keywords" content="font,blog,tranquilpeak">
 <meta property="og:type" content="blog">
@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://i.imgur.com/STJF2Wd.png">
 <meta property="og:image" content="https://i.imgur.com/di3UlOn.pngf">
 <meta property="og:image" content="https://i.imgur.com/lsevPPx.png">
-<meta property="og:updated_time" content="2021-10-31T02:59:06.941Z">
+<meta property="og:updated_time" content="2022-01-12T17:02:18.152Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Editblog - font">
 <meta name="twitter:description" content="部落格字體調整紀實">
@@ -44,7 +44,7 @@
     
     
     <!--STYLES-->
-    <link rel="stylesheet" href="/assets/css/style-hkkeq1yb2elw2ahs6a7hwlp544eksvbjatxutpqf4wt9bbcocwgox9ngw1md.min.css">
+    <link rel="stylesheet" href="/assets/css/style-0ymihzaoxubpld8zwkywwfougwjmzu1grfmubxujxwleljo7zd26ht6zsyi4.min.css">
     <!--STYLES END-->
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135083609-1"></script>
@@ -366,7 +366,7 @@
 
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
-        Copyrights &copy; 2021 halloworld. All Rights Reserved.
+        Copyrights &copy; 2022 halloworld. All Rights Reserved.
     </span>
 </footer>
 
@@ -509,7 +509,7 @@
         
 <div id="cover" style="background-image:url('/assets/images/trail.jpg');"></div>
         <!--SCRIPTS-->
-<script src="/assets/js/script-s2otpoqjka457mu6yfjapsnz7gyj09v4pjczurpasdiozhlvj0qctz1fqega.min.js"></script>
+<script src="/assets/js/script-uobjlmcto6rnc7ddhzjuqks3qs4x7eulba0xt8ittsyg81wklo0nyvm61vyk.min.js"></script>
 <!--SCRIPTS END-->
 
     
