@@ -24,7 +24,7 @@ date: 2021-08-16 11:08:38
 #### 2014 ~ 2017
 * 2014 ~ 2017 Dafeng Senior High-School - 丹鳳高級中學
 	* [Dafeng Astronomy Club](https://www.facebook.com/%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%B9%E9%B3%B3%E9%AB%98%E4%B8%AD%E5%A4%A9%E6%96%87%E7%A4%BE-DFAC-251713704911441)
-	<span><img style="display:inline-block" src="https://i.imgur.com/EA1YtxO.png" ><img src="https://scontent.ftpe4-1.fna.fbcdn.net/v/t1.18169-9/10636118_699825023433638_8462795450006061107_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=mOUuCQ04fjgAX-x3fO1&_nc_ht=scontent.ftpe4-1.fna&oh=ee73786370ef37975cbe3d39c489c0f7&oe=614C86D2" style="display:inline-block" width="150" height="150"></span>
+	<span><img style="display:inline-block" src="https://i.imgur.com/EA1YtxO.png" >
 
 ### Intern (2019.01 ~ 2019.03) / (2021.01 ~ 2021.07)
 * [Galaxy Software Service 叡揚資訊股份有限公司](https://www.gss.com.tw/)
