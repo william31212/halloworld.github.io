@@ -5,32 +5,34 @@ date: 2021-08-16 11:08:38
 
 ## Profile
 
-- Portfolio: Graduate Student / Cyber-security Researcher / Half-Coder-Hacker
-- Hobbies: Taiwan's Indie band / Hip-Hop / Photograph 
+- Portfolio: Graduate Student / Cyber-security Researcher / CTFer(?
+- Hobbies: Taiwan's Indie band / Hip-Hop / Astronomy Photograph(?
 
 ### School
 
 #### 2021 ~ now
 * National Tsing-Hua University (Institute of Information Security) - 清華大學資訊安全研究所
-	<img src="http://www.d4led.com/wp-content/uploads/2018/04/%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8logo.jpg" width="100px">
+	<img src="https://i.imgur.com/L1fSm8H.png" width="100px">
 
 #### 2017 ~ 2020
 * Fu-Jen University (Computer Science and Information Enfineering) - 輔仁大學資訊工程學系
 	* [NISRA (Network and Information Security Research Association)](https://www.nisra.net/)
 	* [CPC (Corporation of Programming Contest)](https://www.facebook.com/FJCU.CPC/)
-	<span><img style="display:inline-block" src="https://upload.wikimedia.org/wikipedia/zh/thumb/b/b8/Fu_Jen_Catholic_University_Seal.jpg/180px-Fu_Jen_Catholic_University_Seal.jpg" width="150" height="150">&nbsp;&nbsp;&nbsp;<img style="display:inline-block" src="https://i.imgur.com/d4eYPGP.png" width="150" height="150" >&nbsp;&nbsp;&nbsp;<img style="display:inline-block" src="https://i.imgur.com/5qiQy5i.png" width="150" height="150"></span>
+	<span><img style="display:inline-block" src="https://i.imgur.com/iwKSypL.png" width="150" height="150">&nbsp;&nbsp;&nbsp;<img style="display:inline-block" src="https://i.imgur.com/d4eYPGP.png" width="150" height="150" >&nbsp;&nbsp;&nbsp;<img style="display:inline-block" src="https://i.imgur.com/5qiQy5i.png" width="150" height="150"></span>
 
 	
 #### 2014 ~ 2017
-* 2014 ~ 2017 Dafeng Senior High-School - 丹鳳高級中學
+* Dafeng Senior High-School - 丹鳳高級中學
 	* [Dafeng Astronomy Club](https://www.facebook.com/%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%B9%E9%B3%B3%E9%AB%98%E4%B8%AD%E5%A4%A9%E6%96%87%E7%A4%BE-DFAC-251713704911441)
 	<span><img style="display:inline-block" src="https://i.imgur.com/EA1YtxO.png" >
 
-### Intern (2019.01 ~ 2019.03) / (2021.01 ~ 2021.07)
+### Intern 
+#### (2019.01 ~ 2019.03) / (2021.01 ~ 2021.07)
 * [Galaxy Software Service 叡揚資訊股份有限公司](https://www.gss.com.tw/)
 	* [Checkmarx Team](https://www.gss.com.tw/checkmarx) 
+		* White-box SourceCode Testing, The Product support 
 	<span>
-	<img style="display:inline-block" src="https://www.gss.com.tw/templates/gss/html/com_easyblog/schema/logo.png"  width="300" height="140">&nbsp;<img style="display:inline-block" src="https://i.imgur.com/CPHyQiQ.png">
+	<img style="display:inline-block" src="https://i.imgur.com/48XZ3QD.png"  width="300" height="140">&nbsp;<img style="display:inline-block" src="https://i.imgur.com/CPHyQiQ.png">
 	</span>
 
 ## Project
@@ -46,6 +48,7 @@ date: 2021-08-16 11:08:38
 | 2020 |  | 
 | [Rish Engine](https://github.com/rishteam/dod) | 2D Game engine (build by C++/SFML/ImGui/fmt/spdlog/GLM) |
 | [正_卍乂駭客 の tool乂卍_〆](https://drive.google.com/file/d/1owOJgHalxHMk_s3LNIqIiBy7soUMYYoN/view) | Chrome Extension Pentesting Tools (build by Javascript)|
+
 
 ## Course
 
@@ -64,9 +67,17 @@ date: 2021-08-16 11:08:38
 
 ## Competition
 
-| Year | Description |
-| --- | --- | 
-| 2019 | ICPC (International Collegiate Programming Contest) - Brozen Award |
-| 2019 | TOPC (Taiwan Online Programming Contest) 台灣線上程式競賽 - Excellence Award | 
-| 2019 | NCPU (National Contest for Private Universities) - Silver Award |
-| 2019 | Cyber security Compeptition in Taiwan (9th) |
+| Category | Year | Description |
+| --- | --- | --- | 
+| Programing |
+| | 2019 | ICPC (International Collegiate Programming Contest) - Brozen Award |
+| | 2019 | TOPC (Taiwan Online Programming Contest) 台灣線上程式競賽 - Excellence Award | 
+| | 2019 | NCPU (National Contest for Private Universities) - Silver Award |
+| | 2019 | Cyber security Compeptition in Taiwan (9th) |
+| Security  |
+| | 2019 | AIS3 - Cryptograph and Cryptanalysis (Pre-Exam: 145th) |
+| | 2019 | Taiwan's Cyber Security Contest(資安技能金盾獎) - 嶄露頭角獎 (5~10th/145) | 
+| | 2020 | AIS3 - Web Security (Pre-Exam: 36th) |
+| | 2020 | Taiwan's Cyber Security Contest(資安技能金盾獎) - 決賽入圍 (Finalist) | 
+| | 2020 | zyxel-foundation Cyber Security Contest(榮耀資戰) - 決賽入圍 (Finalist) | 
+| | 2021 | Taiwan's Cyber Security Contest(資安技能金盾獎) - 決賽入圍 (Finalist) | 
