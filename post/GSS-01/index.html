@@ -13,7 +13,7 @@
         <link rel="icon" href="https://blog.halloworldis.me/assets/images/favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"Course1 環境安裝\n安裝VS跟nuget，SSMS，跟公司的一些東西\n\nCourse2 MS-SQL語法練習\n當初寫的時候，就按照學校考試的方式寫，完全沒考慮過效率或者可讀性。寫出來的結果也符合期待，不過實際上是不能這樣子的\n\n以下分享各種坑\ninner join / left join / right join沒有考慮，全部寫inner join，導致有SQL-Query查出來會有部分資料會遺失\n\n各種JOIN的圖\nhttps://i.stack.imgur.com/VQ5XP.png\n當時腦袋模糊不清\n\n\n\n\n\n\n列出前五名的值???\n\n當時天真的我就直接TOP(5)，發現同分的都沒列出\n解法就是With ties\n\n\n列出一季當中的數量，當時用hardcode寫法\n\n問題: 一季的規則變怎辦\n解法: 把規則放在TABLE，萬一規則變只要改表\n\n\n會忘記規定，數字要三位一撇\n\n解法: https://harry-lin.blogspot.com/2018/12/mssql.html\n\n\n\n","dateCreated":"2020-02-17T12:37:33+00:00","dateModified":"2022-01-12T17:02:18+00:00","datePublished":"2020-02-17T12:37:33+00:00","description":"","headline":"GSS_01","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.halloworldis.me/post/GSS-01/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://blog.halloworldis.me/post/GSS-01/","keywords":"GSS"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"Course1 環境安裝\n安裝VS跟nuget，SSMS，跟公司的一些東西\n\nCourse2 MS-SQL語法練習\n當初寫的時候，就按照學校考試的方式寫，完全沒考慮過效率或者可讀性。寫出來的結果也符合期待，不過實際上是不能這樣子的\n\n以下分享各種坑\ninner join / left join / right join沒有考慮，全部寫inner join，導致有SQL-Query查出來會有部分資料會遺失\n\n各種JOIN的圖\nhttps://i.stack.imgur.com/VQ5XP.png\n當時腦袋模糊不清\n\n\n\n\n\n\n列出前五名的值???\n\n當時天真的我就直接TOP(5)，發現同分的都沒列出\n解法就是With ties\n\n\n列出一季當中的數量，當時用hardcode寫法\n\n問題: 一季的規則變怎辦\n解法: 把規則放在TABLE，萬一規則變只要改表\n\n\n會忘記規定，數字要三位一撇\n\n解法: https://harry-lin.blogspot.com/2018/12/mssql.html\n\n\n\n","dateCreated":"2020-02-17T12:37:33+00:00","dateModified":"2022-03-22T19:04:10+00:00","datePublished":"2020-02-17T12:37:33+00:00","description":"","headline":"GSS_01","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.halloworldis.me/post/GSS-01/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://blog.halloworldis.me/post/GSS-01/","keywords":"GSS"}</script>
     <meta name="description" content="Course1 環境安裝 安裝VS跟nuget，SSMS，跟公司的一些東西  Course2 MS-SQL語法練習 當初寫的時候，就按照學校考試的方式寫，完全沒考慮過效率或者可讀性。寫出來的結果也符合期待，不過實際上是不能這樣子的  以下分享各種坑 inner join / left join / right join沒有考慮，全部寫inner join，導致有SQL-Query查出來會有部分資料">
 <meta name="keywords" content="GSS">
 <meta property="og:type" content="blog">
@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Halloworld&#39;s Website">
 <meta property="og:description" content="Course1 環境安裝 安裝VS跟nuget，SSMS，跟公司的一些東西  Course2 MS-SQL語法練習 當初寫的時候，就按照學校考試的方式寫，完全沒考慮過效率或者可讀性。寫出來的結果也符合期待，不過實際上是不能這樣子的  以下分享各種坑 inner join / left join / right join沒有考慮，全部寫inner join，導致有SQL-Query查出來會有部分資料">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2022-01-12T17:02:18.152Z">
+<meta property="og:updated_time" content="2022-03-22T19:04:10.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GSS_01">
 <meta name="twitter:description" content="Course1 環境安裝 安裝VS跟nuget，SSMS，跟公司的一些東西  Course2 MS-SQL語法練習 當初寫的時候，就按照學校考試的方式寫，完全沒考慮過效率或者可讀性。寫出來的結果也符合期待，不過實際上是不能這樣子的  以下分享各種坑 inner join / left join / right join沒有考慮，全部寫inner join，導致有SQL-Query查出來會有部分資料">
@@ -37,7 +37,7 @@
     
     
     <!--STYLES-->
-    <link rel="stylesheet" href="/assets/css/style-0ymihzaoxubpld8zwkywwfougwjmzu1grfmubxujxwleljo7zd26ht6zsyi4.min.css">
+    <link rel="stylesheet" href="/assets/css/style-cvv3663lzcjx874kajvgtqft0eeskqnx245zjjttwm0dswikhfakatqfvcvi.min.css">
     <!--STYLES END-->
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135083609-1"></script>
@@ -64,7 +64,7 @@
         
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">Halloworld&#39;s Website</a>
@@ -87,7 +87,7 @@
         
     
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -195,7 +195,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -363,7 +363,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
     <nav>
         <ul class="post-actions post-action-nav">
@@ -432,7 +432,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -498,9 +498,9 @@
 
         
         
-<div id="cover" style="background-image:url('/assets/images/trail.jpg');"></div>
+<div id="cover" style="background-image:url('/assets/images/sunset.jpg');"></div>
         <!--SCRIPTS-->
-<script src="/assets/js/script-uobjlmcto6rnc7ddhzjuqks3qs4x7eulba0xt8ittsyg81wklo0nyvm61vyk.min.js"></script>
+<script src="/assets/js/script-mwzs8pn5xicspdhhnu9ujzntljntdjdrecsacfsxet7i6cwn0zjglylptbql.min.js"></script>
 <!--SCRIPTS END-->
 
     

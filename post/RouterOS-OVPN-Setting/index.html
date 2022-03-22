@@ -13,7 +13,7 @@
         <link rel="icon" href="https://blog.halloworldis.me/assets/images/favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"\nRouterOS 自架 OpenVPN型號 / 版本\nMitrotik hAP ac² / RouterOS v6.47.10 / $2730 TWD\n因為有 VPN 需求，而從蝦皮購入此台 Router，此台有 AP 功能\n\n產憑證\n因為 OpenVPN 要求要有憑證才能連線，因此必須產憑證給它\n透過 Openssl 自產憑證，餵給 RouterOS\n\n1234# 使用 RSA 演算法產生 2048 bit 長度私鑰 (ca.key)openssl genrsa -out ca.key 2048# 簽發憑證 (ca.crt)openssl req -new -x509 -key ca.key -out ca.crt\n餵憑證\n開 Files，把 ca.crt跟 ca.key 匯入\n\n開terminal，匯入到 System 中的 Cerificates\n\n\n\n這邊利用 cli 進行匯入， 因為用GUI的我一直失敗\n\n123456789101112131415161718/certificate import file-name=ca.crt# outputpassphrase:     certificates-imported: 1    private-keys-imported: 0           files-imported: 1      decryption-failures: 0 keys-with-no-certificate: 0/certificate import file-name=ca.key# outputpassphrase:     certificates-imported: 0    private-keys-imported: 1           files-imported: 1      decryption-failures: 0 keys-with-no-certificate: 0\nPPP 設定 OVPN Server\n12345678910111213# 設定一段ip段 10.10.0.1-10.10.0.254，準備給 VPN 發的時候使用/ip pool add name=ovpn_pool ranges=10.10.0.1-10.10.0.254# remote-address: OpenVPN 發給 Client 端的 IP# local-address: OpenVPN 連線後，在 Server端 的 IP# 在此筆者都是使用 ovpn_pool (10.10.0.1-10.10.0.254)/ppp profile add local-address=ovpn_pool name=ovpn remote-address=ovpn_pool# 設定 ovpn-server 的憑證/interface ovpn-server server set certificate=ca.crt_0 cipher=aes256 default-profile=ovpn enabled=yes netmask=16# 設定Client端的帳號密碼/ppp secret add name=&lt;VPN帳號設定&gt; password=&lt;VPN密碼設定&gt; profile=ovpn service=ovpn\n\n將 Require Client Certificate 取消，才能在不把key放在 .ovpn 進行連線\n\n\nClient 端設定\n自行寫設定檔，副檔名請使用.ovpn結尾\n\n以下為設定檔範例，&lt;&gt;為抽換的位置\n1234567891011121314151617clientdev tunproto tcpremote &lt;VPN外部IP&gt; &lt;VPN外部Port&gt;auth-user-passauth SHA1cipher AES-256-CBCverb 5redirect-gateway def1dhcp-option DNS 1.1.1.1auth-user-pass&lt;ca&gt;-----BEGIN CERTIFICATE-----&lt;將ca.crt內容複製到這裡&gt;-----END CERTIFICATE-----&lt;/ca&gt;\n\n\n\n參考自: https://blog.ladsai.com/routeros-openvpn-server-client-%E8%A8%AD%E5%AE%9A.html\n","dateCreated":"2021-10-31T02:06:23+00:00","dateModified":"2022-01-12T17:02:18+00:00","datePublished":"2021-10-31T02:06:23+00:00","description":"RouterOS 自架 OpenVPN","headline":"RouterOS-OVPN-Setting","image":["https://i.mt.lv/cdn/rb_images/1471_hi_res.png"],"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.halloworldis.me/post/RouterOS-OVPN-Setting/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://blog.halloworldis.me/post/RouterOS-OVPN-Setting/","keywords":"RouterOS, Mitrotik, OpenVPN","thumbnailUrl":"https://i.mt.lv/cdn/rb_images/1471_hi_res.png"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg"},"articleBody":"\nRouterOS 自架 OpenVPN型號 / 版本\nMitrotik hAP ac² / RouterOS v6.47.10 / $2730 TWD\n因為有 VPN 需求，而從蝦皮購入此台 Router，此台有 AP 功能\n\n產憑證\n因為 OpenVPN 要求要有憑證才能連線，因此必須產憑證給它\n透過 Openssl 自產憑證，餵給 RouterOS\n\n1234# 使用 RSA 演算法產生 2048 bit 長度私鑰 (ca.key)openssl genrsa -out ca.key 2048# 簽發憑證 (ca.crt)openssl req -new -x509 -key ca.key -out ca.crt\n餵憑證\n開 Files，把 ca.crt跟 ca.key 匯入\n\n開terminal，匯入到 System 中的 Cerificates\n\n\n\n這邊利用 cli 進行匯入， 因為用GUI的我一直失敗\n\n123456789101112131415161718/certificate import file-name=ca.crt# outputpassphrase:     certificates-imported: 1    private-keys-imported: 0           files-imported: 1      decryption-failures: 0 keys-with-no-certificate: 0/certificate import file-name=ca.key# outputpassphrase:     certificates-imported: 0    private-keys-imported: 1           files-imported: 1      decryption-failures: 0 keys-with-no-certificate: 0\nPPP 設定 OVPN Server\n12345678910111213# 設定一段ip段 10.10.0.1-10.10.0.254，準備給 VPN 發的時候使用/ip pool add name=ovpn_pool ranges=10.10.0.1-10.10.0.254# remote-address: OpenVPN 發給 Client 端的 IP# local-address: OpenVPN 連線後，在 Server端 的 IP# 在此筆者都是使用 ovpn_pool (10.10.0.1-10.10.0.254)/ppp profile add local-address=ovpn_pool name=ovpn remote-address=ovpn_pool# 設定 ovpn-server 的憑證/interface ovpn-server server set certificate=ca.crt_0 cipher=aes256 default-profile=ovpn enabled=yes netmask=16# 設定Client端的帳號密碼/ppp secret add name=&lt;VPN帳號設定&gt; password=&lt;VPN密碼設定&gt; profile=ovpn service=ovpn\n\n將 Require Client Certificate 取消，才能在不把key放在 .ovpn 進行連線\n\n\nClient 端設定\n自行寫設定檔，副檔名請使用.ovpn結尾\n\n以下為設定檔範例，&lt;&gt;為抽換的位置\n1234567891011121314151617clientdev tunproto tcpremote &lt;VPN外部IP&gt; &lt;VPN外部Port&gt;auth-user-passauth SHA1cipher AES-256-CBCverb 5redirect-gateway def1dhcp-option DNS 1.1.1.1auth-user-pass&lt;ca&gt;-----BEGIN CERTIFICATE-----&lt;將ca.crt內容複製到這裡&gt;-----END CERTIFICATE-----&lt;/ca&gt;\n\n\n\n參考自: https://blog.ladsai.com/routeros-openvpn-server-client-%E8%A8%AD%E5%AE%9A.html\n","dateCreated":"2021-10-31T02:06:23+00:00","dateModified":"2022-03-22T19:04:10+00:00","datePublished":"2021-10-31T02:06:23+00:00","description":"RouterOS 自架 OpenVPN","headline":"RouterOS-OVPN-Setting","image":["https://i.mt.lv/cdn/rb_images/1471_hi_res.png"],"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.halloworldis.me/post/RouterOS-OVPN-Setting/"},"publisher":{"@type":"Organization","name":"halloworld","sameAs":["https://github.com/william31212","https://www.facebook.com/pinhan.huang.5","https://www.linkedin.com/in/%E5%93%81%E7%BF%B0-%E9%BB%83-9b80a2180/","https://www.instagram.com/pinhan0601/?hl=zh-tw"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://blog.halloworldis.me/post/RouterOS-OVPN-Setting/","keywords":"RouterOS, Mitrotik, OpenVPN","thumbnailUrl":"https://i.mt.lv/cdn/rb_images/1471_hi_res.png"}</script>
     <meta name="description" content="RouterOS 自架 OpenVPN">
 <meta name="keywords" content="RouterOS,Mitrotik,OpenVPN">
 <meta property="og:type" content="blog">
@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://i.imgur.com/CNnXdQK.png">
 <meta property="og:image" content="https://i.imgur.com/n5YWWSW.png">
 <meta property="og:image" content="https://i.imgur.com/54cr8jA.png">
-<meta property="og:updated_time" content="2022-01-12T17:02:18.152Z">
+<meta property="og:updated_time" content="2022-03-22T19:04:10.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RouterOS-OVPN-Setting">
 <meta name="twitter:description" content="RouterOS 自架 OpenVPN">
@@ -45,7 +45,7 @@
     
     
     <!--STYLES-->
-    <link rel="stylesheet" href="/assets/css/style-0ymihzaoxubpld8zwkywwfougwjmzu1grfmubxujxwleljo7zd26ht6zsyi4.min.css">
+    <link rel="stylesheet" href="/assets/css/style-cvv3663lzcjx874kajvgtqft0eeskqnx245zjjttwm0dswikhfakatqfvcvi.min.css">
     <!--STYLES END-->
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135083609-1"></script>
@@ -72,7 +72,7 @@
         
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">Halloworld&#39;s Website</a>
@@ -95,7 +95,7 @@
         
     
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -203,7 +203,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -369,7 +369,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
     <nav>
         <ul class="post-actions post-action-nav">
@@ -437,7 +437,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -503,9 +503,9 @@
 
         
         
-<div id="cover" style="background-image:url('/assets/images/trail.jpg');"></div>
+<div id="cover" style="background-image:url('/assets/images/sunset.jpg');"></div>
         <!--SCRIPTS-->
-<script src="/assets/js/script-uobjlmcto6rnc7ddhzjuqks3qs4x7eulba0xt8ittsyg81wklo0nyvm61vyk.min.js"></script>
+<script src="/assets/js/script-mwzs8pn5xicspdhhnu9ujzntljntdjdrecsacfsxet7i6cwn0zjglylptbql.min.js"></script>
 <!--SCRIPTS END-->
 
     
